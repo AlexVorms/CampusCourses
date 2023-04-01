@@ -1,40 +1,16 @@
 import * as axios from 'axios';
 const instance = axios.create({
-    baseURL : 'https://sas.front.kreosoft.space/api/'
+    baseURL : 'https://camp-courses.api.kreosoft.space/'
 });
 
-function getNews() {
-    return instance.get('News')
-        .then(response => {
-            if (response.status === 200) {
-                return response.data;
-            }
-        })
-        .catch(error => {
-            console.log(error.response.data.error);
-        });
-}
 
-function addNews(title, content){
-    return instance.post('News', {
-        title,
-        content,
-        tags: "tag1, tag2",
-        date : "01/01/2021"
+function login(email, password){
+    return instance.post('login', {
+        email,
+        password,
     })
     .then(response => {
-        return response.status
-    })
-    .catch(error => {
-        console.log(error.response.data.error);
-    });
-}
-
-function setLike(id){
-    return instance.post('News/like', {
-        id
-    })
-    .then(response => {
+        console.log(response);
         return response.status
     })
     .catch(error => {

@@ -1,3 +1,12 @@
+{
+  "fullName": "Victoria Rain",
+  "birthDate": "2003-11-06T03:33:38.158Z",
+  "email": "victoria@mail.ru",
+  "password": "victoria03",
+  "confirmPassword": "victoria03"
+}
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,37 +1,85 @@
-import newsReducer from './newsReducer';
+
 
 let store = {
-    _state: {
-        newsPage: {
-            news: [
-                { id: 1, title: "First news", content: "First item content", likes: 2 },
-                { id: 2, title: "Second news", content: "Second item content", likes: 4 },
-                { id: 3, title: "Third news", content: "Third item content", likes: 223 },
-                { id: 4, title: "Fourth news", content: "Fourth item content", likes: 12 }
-            ],
-            orderMessage: "Not ordered",
-            newsAddData: {
-                title : "",
-                content : ""
+    state: {
+        groupList:{
+            group: [
+                {
+                  id: "b785b820-10ec-4450-8449-08db2e8f03b3",
+                  name: "Психология"
+                },
+                {
+                  id: "5c74b5ba-da9e-423c-844a-08db2e8f03b3",
+                  name: "Иностранные языки"
+                },
+                {
+                  id: "3fe78a26-83e1-4170-844c-08db2e8f03b3",
+                  name: "Программирование"
+                },
+                {
+                  id: "466a37b3-2acf-4f4f-aed3-08db31fd15b0",
+                  name: "Философия"
+                }
+              ]
+        },
+        course:[
+            {
+              id: "284218d8-ce17-4d6b-db5f-08db2e90e277",
+              name: "Я полюбил публичные выступления",
+              startYear: 2022,
+              maximumStudentsCount: 100,
+              remainingSlotsCount: 100,
+              status: "OpenForAssigning",
+              semester: "Spring"
+            },
+            {
+              id: "25739b12-f517-4bdd-db61-08db2e90e277",
+              name: "Психология парных отношений: тренинг взаимопонимания",
+              startYear: 2022,
+              maximumStudentsCount: 200,
+              remainingSlotsCount: 200,
+              status: "OpenForAssigning",
+              semester: "Spring"
+            },
+            {
+              id: "0157c4ca-9617-4c00-db62-08db2e90e277",
+              name: "Кампусный курс - Социальная тревожность во время обучения в университете: что это такое и как с этим справляться?",
+              startYear: 2022,
+              maximumStudentsCount: 100,
+              remainingSlotsCount: 100,
+              status: "OpenForAssigning",
+              semester: "Spring"
+            },
+            {
+              id: "c2145e52-6df0-4dc9-a533-08db31d28dd4",
+              name: "string",
+              startYear: 2029,
+              maximumStudentsCount: -1,
+              remainingSlotsCount: -1,
+              status: "Created",
+              semester: "Autumn"
+            },
+            {
+              id: "0b9b361e-5c1e-4106-a534-08db31d28dd4",
+              name: "string",
+              startYear: 2029,
+              maximumStudentsCount: -253,
+              remainingSlotsCount: -253,
+              status: "Created",
+              semester: "Autumn"
+            },
+            {
+              id: "9c4347d0-4e57-4846-975f-08db327c7f06",
+              name: "Интересный курс",
+              startYear: 2023,
+              maximumStudentsCount: 50,
+              remainingSlotsCount: 50,
+              status: "Created",
+              semester: "Autumn"
             }
-        }
+          ]
     },
-    _notifySubscriber() {
-        console.log("Nobody subsribed")
-    },
-    dispatch(action) {
-        console.log("dispatcher was called!");
-        this._state.newsPage = newsReducer(this._state.newsPage, action);
-        this._notifySubscriber();
-    },
-    getState() {
-        return this._state;
-    },
-    subscribe(observer) {
-        this._notifySubscriber = observer;
-    }
+    
 } 
-
-window.store = store;
 export default store;
 
