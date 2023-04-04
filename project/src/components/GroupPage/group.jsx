@@ -10,7 +10,7 @@ class Group extends React.Component {
       return (
         <div className="mt-3 mb-3 p-3">
             <div className="list-group">
-            {this.props.groupList.group.map((value) => {
+            {this.props.group.map((value) => {
                 return <GroupItem name ={value.name}
                 key = {value.id}
                 id = {value.id}/>

@@ -1,18 +1,22 @@
 import { connect } from "react-redux";
 import React from 'react';
-import News from "./news";
-import { sortNewsAsc, sortNewsDesc, setNews, getNewsThunk, setLikeThunk } from '../../store/newsReducer';
+import Group from './group'
+import { deleteGroup, setGroupAC } from "../../reducers/groupReduser";
 
-class InnerNewsContainer extends React.Component {
-    componentDidMount() {
-        this.props.getNewsThunk();
+let mapStateToProps = (state) =>{
+    return {
+        group: state.groupPage.group
     }
-    render() { return (<News {...this.props} />) }
-}
-function mapStateToProps(state) {
-    return { newsPage: state.newsPage }
 }
 
-const NewsContainer = connect(mapStateToProps,
-    { sortNewsAsc, sortNewsDesc, setNews, getNewsThunk, setLikeThunk })(InnerNewsContainer);
-export default NewsContainer;
+let mapDispatchToProps = (dispatch) =>{
+    return{
+        delete:(id) =>{
+            dispatch(deleteGroup(id))
+        },
+        setGroup:(group) =>{
+            dispatch(setGroupAC(group))
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Group);
