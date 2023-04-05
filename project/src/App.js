@@ -5,8 +5,9 @@ import Registration from "./components/Registration";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Login from "./components/Login";
 import Profile from "./components/Profile";
-import Classes from "./components/ClassesPage/Classes";
+
 import GroupConteiner from "./components/GroupPage/GroupConteiner";
+import CoursesContainer from "./components/CoursesPage/CoursesContainer";
 
 
 const App = () =>{
@@ -20,7 +21,7 @@ const App = () =>{
         <Route path="/login" element={<Login/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/groups" element={<GroupConteiner/>}/>
-       {/* <Route path="/groups/id" element={<Classes course={props.appState.state.course}/>}/> */}
+       <Route path="/courses" element={<CoursesContainer/>}/>
       </Routes>
     </div>
    </BrowserRouter>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card} from 'react-bootstrap'
 
-class ClassItem extends React.Component {
+class CoursesItem extends React.Component {
     constructor(props) {
       super(props);
       this.handleClick = this.handleClick.bind(this);
@@ -44,4 +44,4 @@ class ClassItem extends React.Component {
     }
   }
 
-  export default ClassItem;
+  export default CoursesItem;
