@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
 import React from 'react';
 import Group from './group'
-import { deleteGroup, setGroupAC } from "../../reducers/groupReduser";
+import { deleteGroup, setGroupAC, setIsFetchingAC } from "../../reducers/groupReduser";
 
 let mapStateToProps = (state) =>{
     return {
-        group: state.groupPage.group
+        group: state.groupPage.group,
+        isFetching: state.groupPage.isFetching
     }
 }
 
@@ -16,6 +17,9 @@ let mapDispatchToProps = (dispatch) =>{
         },
         setGroup:(group) =>{
             dispatch(setGroupAC(group))
+        },
+        setIsFetching:(isFetching) =>{
+            dispatch(setIsFetchingAC(isFetching))
         }
     }
 }

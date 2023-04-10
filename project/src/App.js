@@ -21,7 +21,7 @@ const App = () =>{
         <Route path="/login" element={<Login/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/groups" element={<GroupConteiner/>}/>
-       <Route path="/courses" element={<CoursesContainer/>}/>
+       <Route path="/groups/:id" element={<CoursesContainer/>}/>
       </Routes>
     </div>
    </BrowserRouter>

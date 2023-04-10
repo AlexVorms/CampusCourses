@@ -3,16 +3,21 @@ import CoursesItem from './CoursesItem';
 import axios from 'axios';
 
 const config = {
-  headers: { Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhMjg0YmFmZC1mMmZhLTRmZjMtNTRiYS0wOGRiMzI2MjMyMTMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbiI6Ijg0Nzk5ZmMyLWRkMDctNGI3Mi05NmRjLTlkMTQ4NWY1YTJmMSIsIm5iZiI6MTY4MDY5MjM3MiwiZXhwIjoxNjgwNjk1OTcyLCJpYXQiOjE2ODA2OTIzNzIsImlzcyI6IkNhbXB1c0NvdXJzZS5BUEkiLCJhdWQiOiJDYW1wdXNDb3Vyc2UuQVBJIn0.dkLh2wCTfCJ1qVm8VMfZEZlIe3rvGBC71fsV8TuDK4g"}` }
+  headers: { Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhMjg0YmFmZC1mMmZhLTRmZjMtNTRiYS0wOGRiMzI2MjMyMTMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbiI6ImFlYmVjMGY5LTE3NTktNDhmZi04MDAzLTJlNDJkZTIxY2ZhMyIsIm5iZiI6MTY4MTAxMzMzMywiZXhwIjoxNjgxMDE2OTMzLCJpYXQiOjE2ODEwMTMzMzMsImlzcyI6IkNhbXB1c0NvdXJzZS5BUEkiLCJhdWQiOiJDYW1wdXNDb3Vyc2UuQVBJIn0.wn9CuZPKcAFqU796BDp70j-0L6k9TaZZGn1tVZLhW8g"}` }
 };
 
 class Courses extends React.Component {
     constructor(props) {
         super(props);
-        axios.get("https://camp-courses.api.kreosoft.space/groups/3fe78a26-83e1-4170-844c-08db2e8f03b3",config).then(response =>{
+        
+      }
+      componentDidMount(){
+        if(this.props.courses.length === 0){
+        axios.get("https://camp-courses.api.kreosoft.space/groups/" + this.props.match.params.id,config).then(response =>{
           console.log(response)
             this.props.setCourses(response.data)
           })
+        }
       }
     render() {
       return (

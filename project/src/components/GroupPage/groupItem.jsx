@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from 'react-bootstrap'
-
+import { NavLink } from 'react-router-dom';
 class GroupItem extends React.Component {
     constructor(props) {
       super(props);
@@ -19,7 +19,8 @@ class GroupItem extends React.Component {
      
       return (
         <div className = 'container' type="button">
-                <Card onClick={this.handleClick}>
+          <NavLink to = {'/groups/' + this.props.id}>
+                <Card >
                      <Card.Body>
                      <div className = 'row'>
                         <div className = 'col'>
@@ -31,7 +32,9 @@ class GroupItem extends React.Component {
                         </div>
                      </Card.Body>
                 </Card>
+                </NavLink>
         </div>
+     
       )
     }
   }
