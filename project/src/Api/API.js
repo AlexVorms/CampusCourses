@@ -1,12 +1,16 @@
 import axios from 'axios';
 
+ 
+let token = JSON.parse(localStorage.getItem('user'));
+
 const instance = axios.create({
     baseURL:"https://camp-courses.api.kreosoft.space/",
-    headers: { Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhMjg0YmFmZC1mMmZhLTRmZjMtNTRiYS0wOGRiMzI2MjMyMTMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbiI6ImFhNjgxZTY1LWE1NGQtNDdlYy1iM2E5LWJmNzIyZTQ1ODY0NiIsIm5iZiI6MTY4MTI3NjE5MywiZXhwIjoxNjgxMjc5NzkzLCJpYXQiOjE2ODEyNzYxOTMsImlzcyI6IkNhbXB1c0NvdXJzZS5BUEkiLCJhdWQiOiJDYW1wdXNDb3Vyc2UuQVBJIn0.l2g1jJK2_VSKkJQG8l16ZPvwZ2fcsdRT1dKFtZHIc9s"}` }
+    headers: { Authorization: `Bearer ${token}` }
 })
 
 
 function getGroups(){
+    
     return instance.get("groups")
     .then(response =>{
         return response.data;
@@ -35,8 +39,24 @@ function getProfile(){
         console.log(error);
     });
 }
+
+function authorisation(email, password){
+    return instance.post('login', {
+        email,
+        password
+    })
+    .then(response => {
+        localStorage.setItem("user", JSON.stringify(response.data.token));
+        return response
+    })
+    .catch(error => {
+        console.log(error.response.data.error);
+    });
+}
+
 export const API = {
     getGroups: getGroups,
     getCourses: getCourses,
-    getProfile: getProfile
+    getProfile: getProfile,
+    authorisation: authorisation
 };

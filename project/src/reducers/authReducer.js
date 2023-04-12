@@ -49,4 +49,13 @@ export function getProfileThunk(){
           })
     }
 }
+
+export function authorisationThunk(email, password){
+    return(dispatch) => {
+        API.authorisation(email,password).then(data =>{
+            dispatch(setIsAuthorisationAC(true))
+            console.log(data);
+        })
+    }
+}
 export default authReducer;

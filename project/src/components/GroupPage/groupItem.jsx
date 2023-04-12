@@ -19,7 +19,7 @@ class GroupItem extends React.Component {
      
       return (
         <div className = 'container' type="button">
-          <NavLink to = {'/groups/' + this.props.id}>
+          <NavLink to = {'/groups/' + this.props.id} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <Card >
                      <Card.Body>
                      <div className = 'row'>
