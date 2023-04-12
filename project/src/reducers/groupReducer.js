@@ -1,3 +1,5 @@
+import { API } from "../Api/API";
+
 
 const DELETE_GROUP = 'DELETE_GROUP';
 const SET_GROUP = 'SET_GROUP';
@@ -34,7 +36,19 @@ const groupReducer = (state = initialState, action) =>{
     }
 }
 
-export const deleteGroup = (id) => ({type:DELETE_GROUP, id})
+// Action creators
+export const deleteGroupAC = (id) => ({type:DELETE_GROUP, id})
 export const setGroupAC = (group) => ({type:SET_GROUP, group})
 export const setIsFetchingAC = (isFetching)=>({type:TOGGLE_IS_FETCHING, isFetching})
+
+// Thunks
+ export function getGroupsThunk(){ 
+    return (dispatch) => {
+    dispatch(setIsFetchingAC(true));
+    API.getGroups().then(data =>{
+          dispatch(setGroupAC(data))
+          dispatch(setIsFetchingAC(false))
+        })
+    }
+}
 export default groupReducer;

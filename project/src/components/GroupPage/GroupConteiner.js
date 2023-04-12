@@ -1,7 +1,19 @@
 import { connect } from "react-redux";
 import React from 'react';
 import Group from './group'
-import { deleteGroup, setGroupAC, setIsFetchingAC } from "../../reducers/groupReduser";
+import { deleteGroupAC, getGroupsThunk } from "../../reducers/groupReducer";
+
+class GroupContainer extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    componentDidMount(){
+        this.props.getGroupsThunk();
+      }
+      render(){
+        return <Group {...this.props}></Group>
+      }
+}
 
 let mapStateToProps = (state) =>{
     return {
@@ -10,17 +22,4 @@ let mapStateToProps = (state) =>{
     }
 }
 
-let mapDispatchToProps = (dispatch) =>{
-    return{
-        delete:(id) =>{
-            dispatch(deleteGroup(id))
-        },
-        setGroup:(group) =>{
-            dispatch(setGroupAC(group))
-        },
-        setIsFetching:(isFetching) =>{
-            dispatch(setIsFetchingAC(isFetching))
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Group);
+export default connect(mapStateToProps, {deleteGroupAC,getGroupsThunk })(GroupContainer);
