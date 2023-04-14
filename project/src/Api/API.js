@@ -54,9 +54,31 @@ function authorisation(email, password){
     });
 }
 
+function logout(){
+    return instance.post('logout')
+    .then(response => {
+        localStorage.removeItem("user");
+        return response;
+    })
+    .catch(error => {
+        console.log(error.response.data.error);
+    });
+}
+
+function Registration(data){
+    return instance.post('registration', data)
+    .then(response => {
+        return response;
+    })
+    .catch(error => {
+        console.log(error.response.data.error);
+    });
+}
 export const API = {
     getGroups: getGroups,
     getCourses: getCourses,
     getProfile: getProfile,
-    authorisation: authorisation
+    authorisation: authorisation,
+    logout: logout,
+    Registration: Registration
 };

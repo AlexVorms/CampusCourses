@@ -6,7 +6,21 @@
   "confirmPassword": "victoria03"
 }
 
-
+birthDate
+: 
+"2004-05-02"
+confirmPassword
+: 
+"password1"
+email
+: 
+"alenaBekker@mail.ru"
+fullName
+: 
+"Алена Беккер"
+password
+: 
+"password1"
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

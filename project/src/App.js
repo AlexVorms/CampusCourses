@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import HomePage from "./components/HomePage";
-import Registration from "./components/Registration";
+import RegistrationContainer from "./components/RegistrationPage/RegistrationContainer";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import ProfileContainer from "./components/ProfilePage/ProfileContainer";
 
@@ -17,7 +17,7 @@ const App = () =>{
       <HeaderContainer/>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/registration" element={<Registration/>}/>
+        <Route path="/registration" element={<RegistrationContainer/>}/>
         <Route path="/login" element={<LoginContainer/>}/>
         <Route path="/profile" element={<ProfileContainer/>}/>
         <Route path="/groups" element={<GroupConteiner/>}/>

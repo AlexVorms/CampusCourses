@@ -6,26 +6,38 @@ import {Container, Row, Col} from 'react-bootstrap';
 class Registration extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {
-        name: '',
-        birsday:'',
-        email:'',
-        password:''
-    };
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+     
+      this.emailRef = React.createRef();
+      this.passwordRef = React.createRef();
+      this.fullNameRef = React.createRef();
+      this.birthDateRef = React.createRef();
+      this.passwordControlRef = React.createRef();
+      this.onChange = this.onChange.bind(this);
     }
-    handleChange(event) {
-        this.setState({name: event.target.value});
-        this.setState({email: event.target.value});
-      }
     
-      handleSubmit(event) {
-       console.log(this.state);
-        event.preventDefault();
-      }
-    
+    onChange() {
+        let password = this.passwordRef.current.value,
+        passwordControl = this.passwordControlRef.current.value,
+        email = this.emailRef.current.value,
+        birthDate = this.birthDateRef.current.value,
+        fullName = this.fullNameRef.current.value;
+        if(password === passwordControl){
+            let data = {
+                fullName: fullName,
+                birthDate: birthDate,
+                email: email,
+                password: password,
+                confirmPassword: passwordControl
+            }
+            console.log(data);
+           
+            this.props.handleOnClick(data)
+        }
+        else{
+           alert('Пароли не совпадают')
+        }
+    }
+
     render() {
         return (
             <Container>
@@ -34,14 +46,14 @@ class Registration extends React.Component {
                         <h1>Регистрация нового пользователя</h1>
                     <Form>
                     <Form.Label>ФИО</Form.Label>
-                        <Form.Control type="name" value={this.state.name} onChange={this.handleChange}/>
+                        <Form.Control type="name" ref={this.fullNameRef}/>
 
                     <Form.Label>День Рождения</Form.Label>
-                    <Form.Control type="date" />
+                    <Form.Control type="date" ref={this.birthDateRef}/>
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" value={this.state.email} onChange={this.handleChange} />
+                        <Form.Control type="email"  ref={this.emailRef} />
                         <Form.Text className="text-muted">
                         Email будет использоваться для входа в систему
                         </Form.Text>
@@ -49,12 +61,12 @@ class Registration extends React.Component {
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Пароль</Form.Label>
-                        <Form.Control type="password" value={this.state.password} onChange={this.handleChange} />
+                        <Form.Control type="password" ref={this.passwordRef} />
                         <Form.Label>Повторите пароль</Form.Label>
-                        <Form.Control type="password" />
+                        <Form.Control type="password" ref={this.passwordControlRef}/>
                     </Form.Group>
                     
-                    <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+                    <Button variant="primary" type="button" onClick={this.onChange}>
                         Зарегистрироваться
                     </Button>
                     </Form>

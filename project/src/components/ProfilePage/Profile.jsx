@@ -19,7 +19,7 @@ class Profile extends React.Component{
               Email
             </Form.Label>
             <Col sm={10}>
-              <Form.Control type="email" value={this.props.email} disabled />
+              <Form.Control type="email" placeholder={this.props.email} disabled />
             </Col>
           </Form.Group>
 
@@ -28,7 +28,7 @@ class Profile extends React.Component{
               ФИО
             </Form.Label>
             <Col sm={10}>
-              <Form.Control type="email" value={this.props.fullName} />
+              <Form.Control type="email" placeholder={this.props.fullName} />
             </Col>
           </Form.Group>
         
