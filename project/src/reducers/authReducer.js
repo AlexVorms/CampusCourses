@@ -4,12 +4,18 @@ const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const USER_IS_AUTH = 'USER_IS_AUTH';
 
+
 let initialState = {
-    email: null,
+    email: '',
     fullName:null,
     birthDate:null,
-    isAuth:false,
-    isFetching: false
+    isAuth: false,
+    isFetching: false,
+    Role:{
+        isTeacher: false,
+        isStudent: false,
+        isAdmin:false
+    }
 };
 
 const authReducer = (state = initialState, action) =>{
@@ -25,7 +31,7 @@ const authReducer = (state = initialState, action) =>{
             }
         }
         case USER_IS_AUTH:{
-            return{...state, isAuth: action.isAuth}
+            return{...state, isAuth: action.data.isAuth, email: action.data.email}
         }
         default: 
             return state;
@@ -34,7 +40,7 @@ const authReducer = (state = initialState, action) =>{
 }
 
 export const setUserDataAC = (data) => ({type:SET_USER_DATA, data})
-export const setIsAuthorisationAC = (isAuth) => ({type:USER_IS_AUTH, isAuth})
+export const setIsAuthorisationAC = ( email,isAuth) => ({type:USER_IS_AUTH, data:{isAuth, email}})
 export const setIsFetchingAC = (isFetching)=>({type:TOGGLE_IS_FETCHING, isFetching})
 
 // THUNKS
@@ -43,7 +49,6 @@ export function getProfileThunk(){
     return(dispatch) =>{
         dispatch(setIsFetchingAC(true));
         API.getProfile().then(data =>{
-            console.log(data)
             dispatch(setUserDataAC(data))
             dispatch(setIsFetchingAC(false))
           })
@@ -53,9 +58,29 @@ export function getProfileThunk(){
 export function authorisationThunk(email, password){
     return(dispatch) => {
         API.authorisation(email,password).then(data =>{
-            dispatch(setIsAuthorisationAC(true))
-            console.log(data);
+            dispatch(setIsAuthorisationAC(email,true));
         })
+    }
+}
+
+export function logoutThunk(){
+    return(dispatch)=> {
+        API.logout().then(data =>{
+            dispatch(setIsAuthorisationAC('', false));
+        })
+    }
+}
+
+export function registrationThunk(data){
+    return(dispatch) => {
+        API.Registration(data).then(response=>{
+            console.log("OK");
+        })
+    }
+}
+
+export function editProfileThunk(data){
+    return(dispatch) => {
     }
 }
 export default authReducer;
