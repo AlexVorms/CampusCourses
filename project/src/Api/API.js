@@ -47,7 +47,7 @@ function authorisation(email, password){
     })
     .then(response => {
         localStorage.setItem("user", JSON.stringify(response.data.token));
-        return response
+        return response.status
     })
     .catch(error => {
         console.log(error.response.data.error);
@@ -74,11 +74,36 @@ function Registration(data){
         console.log(error.response.data.error);
     });
 }
+
+function EditProfile(fullName, birthDate){
+    return instance.put('profile',{
+        fullName,
+        birthDate
+    })
+    .then(response =>{
+        return response;
+    })
+    .catch(error => {
+        console.log(error.response.data.error);
+    });
+}
+
+function getUserStatus(){
+    return instance.get('roles')
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        console.log(error.response.data.error);
+    });
+}
 export const API = {
     getGroups: getGroups,
     getCourses: getCourses,
     getProfile: getProfile,
     authorisation: authorisation,
     logout: logout,
-    Registration: Registration
+    Registration: Registration,
+    EditProfile: EditProfile,
+    getUserStatus: getUserStatus
 };

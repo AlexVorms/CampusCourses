@@ -24,8 +24,11 @@ const groupReducer = (state = initialState, action) =>{
                 })
             }
         case SET_GROUP:{
-            return{
-                ...state, group:[...state.group, ...action.group]
+            if(state.group.length === 0){
+                return{
+                    ...state, 
+                    group:[...state.group, ...action.group]
+                }
             }
         }
         case TOGGLE_IS_FETCHING:{

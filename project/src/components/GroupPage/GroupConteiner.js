@@ -11,12 +11,15 @@ class GroupContainer extends React.Component {
         this.props.getGroupsThunk();
       }
       render(){
-        return <Group {...this.props}></Group>
+        return (<div>
+            {this.props.isAuth? <Group {...this.props}/> : null}
+        </div>)
       }
 }
 
 let mapStateToProps = (state) =>{
     return {
+        isAuth: state.auth.isAuth,
         group: state.groupPage.group,
         isFetching: state.groupPage.isFetching
     }

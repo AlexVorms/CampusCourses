@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Container, Row, Col} from 'react-bootstrap';
-
+import Preloader from '../common/Preloader';
 
 class Login extends React.Component{
     constructor(props){
@@ -16,7 +16,8 @@ class Login extends React.Component{
     }
     render() {
   
-        return (
+        return <>
+         {this.props.isFetching ? <Preloader/> : 
             <Container>
                 <Row>
                     <Col>
@@ -41,7 +42,8 @@ class Login extends React.Component{
                     </Col>
                 </Row>
             </Container>
-        );
+            }
+        </>
     }
 }
 

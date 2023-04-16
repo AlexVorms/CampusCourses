@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { logoutThunk } from '../../reducers/authReducer';
 class HeaderContainer extends React.Component {
     componentDidMount(){
-
     }
     render(){
         return <Header {...this.props} logout = {logoutThunk}></Header>
@@ -14,7 +13,8 @@ class HeaderContainer extends React.Component {
 let mapStateToProps = (state) => {
     return{
         isAuth:state.auth.isAuth,
-        email:state.auth.email
+        email:state.auth.email,
+        Role:state.auth.Role
     }
 }
 export default connect(mapStateToProps, {logoutThunk})(HeaderContainer);

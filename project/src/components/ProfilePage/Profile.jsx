@@ -6,9 +6,15 @@ import {Container, Row, Col} from 'react-bootstrap';
 class Profile extends React.Component{
   constructor(props){
     super(props);
+    this.fullNameRef = React.createRef();
+      this.birthDateRef = React.createRef();
+      this.onChange = this.onChange.bind(this);
+  }
+  onChange(){
+    console.log(this.fullNameRef.current.value,this.birthDateRef.current.value)
+    this.props.handleOnClick(this.fullNameRef.current.value,this.birthDateRef.current.value)
   }
   render() {
-  
     return (
         <Container>
             <h1>Профиль</h1>
@@ -28,7 +34,7 @@ class Profile extends React.Component{
               ФИО
             </Form.Label>
             <Col sm={10}>
-              <Form.Control type="email" placeholder={this.props.fullName} />
+              <Form.Control  placeholder={this.props.fullName} ref={this.fullNameRef} />
             </Col>
           </Form.Group>
         
@@ -37,15 +43,14 @@ class Profile extends React.Component{
               День рождения
             </Form.Label>
             <Col sm={10}>
-            <Form.Control type="date" />
-            
+            <Form.Control type="date" className="form-control" value={this.props.birthDate} ref={this.birthDateRef}/>
             </Col>
           </Form.Group>
 
 
           <Form.Group as={Row} className="mb-3">
             <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit">Изменить</Button>
+              <Button type="submit" onClick={this.onChange}>Изменить</Button>
             </Col>
           </Form.Group>
         </Form>

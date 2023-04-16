@@ -1,22 +1,31 @@
 import React from 'react';
 import Profile from './Profile';
 import { connect } from "react-redux";
-import { getProfileThunk } from '../../reducers/authReducer';
+import { getProfileThunk, editProfileThunk} from '../../reducers/authReducer';
 
 
 class ProfileContainer extends React.Component {
     constructor(props){
         super(props);
+        this.handleOnClick = this.handleOnClick.bind(this);
     }
     componentDidMount(){
         this.props.getProfileThunk();
     }
+    handleOnClick(fullName, birthDate) {
+        this.props.editProfileThunk(fullName, birthDate);
+    }
     render(){
-        return <Profile {...this.props}></Profile>
+        return (
+        <div>
+            {this.props.isAuth? <Profile {...this.props} handleOnClick = {this.handleOnClick}/> : (window.location.assign('/login'))}
+        </div>
+        )
     }
 }
 let mapStateToProps = (state) =>{
     return {
+        isAuth:state.auth.isAuth,
         email: state.auth.email,
         fullName : state.auth.fullName,
         birthDate: state.auth.birthDate,
@@ -24,4 +33,4 @@ let mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps, {getProfileThunk})(ProfileContainer);
+export default connect(mapStateToProps, {getProfileThunk, editProfileThunk})(ProfileContainer);

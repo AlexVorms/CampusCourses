@@ -5,7 +5,9 @@ import { Container } from "react-bootstrap";
 
 let HeaderForUser = () =>{
     return (
-        <Container>
+        <div className='Havbar'>
+                <Navbar bg="dark" expand="md" variant="dark">
+                <Container>
              <Navbar.Brand >Кампусные курсы</Navbar.Brand>
                  <div className ="col-2 justify-content-end">
                     <Navbar.Brand>
@@ -16,6 +18,8 @@ let HeaderForUser = () =>{
                     </Navbar.Brand>
                     </div>
         </Container> 
+                </Navbar>
+            </div>
     )
 }
 

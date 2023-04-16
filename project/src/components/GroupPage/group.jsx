@@ -13,7 +13,7 @@ class Group extends React.Component {
 
     render() {
       return <>
-      {this.props.isFetching ? <Preloader/> : null}
+      {this.props.isFetching ? <Preloader/> : 
       <div className="mt-3 mb-3 p-3">
             <div className="list-group">
             {this.props.group.map((value) => {
@@ -25,6 +25,7 @@ class Group extends React.Component {
             }
             </div>
         </div>
+        }
         </>
     }
   }
