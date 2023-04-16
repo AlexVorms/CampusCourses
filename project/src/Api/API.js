@@ -97,6 +97,17 @@ function getUserStatus(){
         console.log(error.response.data.error);
     });
 }
+
+function getCourseDetails(id){
+    return instance.get('courses/' + id + '/details')
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        console.log(error.response.data.error);
+    });
+}
+
 export const API = {
     getGroups: getGroups,
     getCourses: getCourses,
@@ -105,5 +116,6 @@ export const API = {
     logout: logout,
     Registration: Registration,
     EditProfile: EditProfile,
-    getUserStatus: getUserStatus
+    getUserStatus: getUserStatus,
+    getCourseDetails: getCourseDetails
 };

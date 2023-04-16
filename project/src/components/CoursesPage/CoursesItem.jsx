@@ -1,33 +1,55 @@
 import React from 'react';
 import {Card} from 'react-bootstrap'
+import { NavLink } from 'react-router-dom';
 
 class CoursesItem extends React.Component {
     constructor(props) {
       super(props);
       this.handleClick = this.handleClick.bind(this);
       this.FoundSemester = this.FoundSemester.bind(this);
+      this.TranslationSemester = this.TranslationSemester.bind(this);
     }
 
     handleClick(){
         console.log(this.props.id)
       }
     FoundSemester(){
-        console.log(this.props.semester)
         if (this.props.semester == 'Autumn'){
             return 'Осенний'
         }
         else if(this.props.semester == 'Spring'){
             return 'Весенний'
         }
+        else if(this.props.semester === 'Summer'){
+          return 'Летний'
+      }
+      else if(this.props.semester === 'Winter'){
+          return 'Зимний'
+      }
     }
+
+    TranslationSemester(){
+      if(this.props.status ==='Started'){
+          return <div className = 'text-primary'>В процессе обучения</div>
+      }
+      else if(this.props.status === 'OpenForAssigning'){
+          return <div className = 'text-success'>Открыт для записи</div>
+      }
+      else if(this.props.status === 'Created'){
+          return <div className = 'text-secondary'>Создан</div>
+      }
+      else if(this.props.status === 'Finished'){
+          return <div className = 'text-danger'>Закрыт</div>
+      }
+  }
     render() {
       return (
         <div className='p-3' type="button">
-             <div>
+             <NavLink to = {'/courses/' + this.props.id} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <Card onClick={this.handleClick}>
                     <Card.Header>
                         <h5>{this.props.name} </h5>
-                        <div className='text-end text-success'>{this.props.status}</div>
+                        <div className='text-end'>{this.TranslationSemester()}</div>
                     </Card.Header>
                      <Card.Body>
                         <div>
@@ -38,7 +60,7 @@ class CoursesItem extends React.Component {
                         </div>
                      </Card.Body>
                 </Card>
-            </div>
+            </NavLink>
         </div>
       )
     }

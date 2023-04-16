@@ -6,7 +6,7 @@ class Header_for_authUserContainer extends React.Component {
     render(){
         return(
             <div>
-                {true? <HeaderForStudent email = {this.props.email}/>:<HeaderForAuthUser email = {this.props.email} logout = {this.props.logout}/>}
+                {this.props.Role.isStudent? <HeaderForStudent email = {this.props.email}/>:<HeaderForAuthUser email = {this.props.email} logout = {this.props.logout}/>}
             </div>
         )
     }

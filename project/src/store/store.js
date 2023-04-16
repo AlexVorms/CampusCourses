@@ -81,5 +81,61 @@ let store = {
     },
     
 } 
+
+// {
+//   "id": "284218d8-ce17-4d6b-db5f-08db2e90e277",
+//   "name": "Я полюбил публичные выступления",
+//   "startYear": 2022,
+//   "maximumStudentsCount": 100,
+//   "studentsEnrolledCount": 2,
+//   "studentsInQueueCount": 0,
+//   "requirements": "<p><em>Уровень подготовки – любой. не люблю публичные выступления(((( +++++</em></p>\n",
+//   "annotations": "<p><em>Цель: Повысить качество общения с публикой</em></p>\n",
+//   "status": "Started",
+//   "semester": "Spring",
+//   "students": [
+//     {
+//       "id": "e3cb6b92-ec0c-42d0-c8de-08db33fba1b6",
+//       "name": "Ситникова Владлена Михайловна",
+//       "email": "vlada1111@mail.ru",
+//       "status": "Accepted",
+//       "midtermResult": null,
+//       "finalResult": null
+//     },
+//     {
+//       "id": "b4ee22ed-4873-4d59-c8dd-08db33fba1b6",
+//       "name": "Обухов Олег Вадимович",
+//       "email": "Oleg1978@mail.ru",
+//       "status": "Accepted",
+//       "midtermResult": null,
+//       "finalResult": null
+//     }
+//   ],
+//   "teachers": [
+//     {
+//       "name": "Первый Препод Курсович",
+//       "email": "firstTeacher@tsu.ru",
+//       "isMain": true
+//     }
+//   ],
+//   "notifications": [
+//     {
+//       "text": "здесь был вася",
+//       "isImportant": false
+//     },
+//     {
+//       "text": "angular топ",
+//       "isImportant": true
+//     },
+//     {
+//       "text": "пиво топ",
+//       "isImportant": false
+//     },
+//     {
+//       "text": "rwezsrdtglh;",
+//       "isImportant": false
+//     }
+//   ]
+// }
 export default store;
 

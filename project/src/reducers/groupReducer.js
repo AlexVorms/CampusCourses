@@ -27,7 +27,7 @@ const groupReducer = (state = initialState, action) =>{
             if(state.group.length === 0){
                 return{
                     ...state, 
-                    group:[...state.group, ...action.group]
+                    group:action.group
                 }
             }
         }

@@ -4,13 +4,8 @@ import { NavLink } from 'react-router-dom';
 class GroupItem extends React.Component {
     constructor(props) {
       super(props);
-      this.handleClick = this.handleClick.bind(this);
       this.handleClick2 = this.handleClick2.bind(this);
     }
-
-    handleClick(){
-        console.log(this.props.id)
-      }
       handleClick2(){
         this.props.delete(this.props.id)
       }

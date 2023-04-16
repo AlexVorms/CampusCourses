@@ -2,13 +2,15 @@ import { legacy_createStore as createStore, combineReducers, applyMiddleware } f
 import groupReducer from "../reducers/groupReducer";
 import coursesReducer from "../reducers/coursesReducer";
 import authReducer from "../reducers/authReducer";
+import courseDetailsReducer from "../reducers/courseDetailsReducer";
 import ThunkMiddleware from "redux-thunk";
 
 
 let reducers = combineReducers({
     groupPage: groupReducer,
     coursesPage: coursesReducer,
-    auth: authReducer
+    auth: authReducer,
+    courseDetailsPage:courseDetailsReducer
 });
 
 let store = createStore(reducers, applyMiddleware(ThunkMiddleware));

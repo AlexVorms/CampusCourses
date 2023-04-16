@@ -8,6 +8,7 @@ import ProfileContainer from "./components/ProfilePage/ProfileContainer";
 import GroupConteiner from "./components/GroupPage/GroupConteiner";
 import CoursesContainer from "./components/CoursesPage/CoursesContainer";
 import LoginContainer from "./components/LoginPage/LoginContainer";
+import CourseDetailsPageContainer from "./components/CourseDetailsPage/CourseDetailsPageContainer";
 
 
 const App = () =>{
@@ -22,6 +23,7 @@ const App = () =>{
         <Route path="/profile" element={<ProfileContainer/>}/>
         <Route path="/groups" element={<GroupConteiner/>}/>
        <Route path="/groups/:id" element={<CoursesContainer/>}/>
+        <Route path = '/courses/:id' element={<CourseDetailsPageContainer/>}/>
       </Routes>
     </div>
    </BrowserRouter>

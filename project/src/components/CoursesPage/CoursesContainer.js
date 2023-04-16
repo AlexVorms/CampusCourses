@@ -18,17 +18,18 @@ export function withRouter(Children){
         super(props);
     }
     componentDidMount(){
-        if(this.props.courses.length === 0){
             this.props.getCoursesThunk(this.props.match.params.id);
-        }
       }
 
       render(){
-        return <Courses {...this.props}></Courses>
+        return (<div>
+             {this.props.isAuth? <Courses {...this.props}/> : null}
+             </div>)
       }
  }
 let mapStateToProps = (state) =>{
     return {
+        isAuth: state.auth.isAuth,
         courses: state.coursesPage.courses
     }
 }
