@@ -3,7 +3,7 @@ import { getCoursesThunk } from "../../reducers/coursesReducer";
 import Courses from "./Courses";
 import { useParams } from 'react-router-dom';
 import React from "react";
-
+import { Navigate } from "react-router-dom";
 
 
 export function withRouter(Children){
@@ -23,7 +23,7 @@ export function withRouter(Children){
 
       render(){
         return (<div>
-             {this.props.isAuth? <Courses {...this.props}/> : null}
+             {this.props.isAuth? <Courses {...this.props}/> : <Navigate to = '/login'/>}
              </div>)
       }
  }

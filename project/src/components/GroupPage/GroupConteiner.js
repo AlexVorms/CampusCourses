@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import React from 'react';
 import Group from './group'
 import { deleteGroupAC, getGroupsThunk } from "../../reducers/groupReducer";
+import { Navigate } from "react-router-dom"
 
 class GroupContainer extends React.Component {
     constructor(props){
@@ -12,7 +13,7 @@ class GroupContainer extends React.Component {
       }
       render(){
         return (<div>
-            {this.props.isAuth? <Group {...this.props}/> : null}
+            {this.props.isAuth? <Group {...this.props}/> : <Navigate to = '/login'/>}
         </div>)
       }
 }

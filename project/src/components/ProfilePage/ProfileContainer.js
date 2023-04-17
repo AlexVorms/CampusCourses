@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from './Profile';
 import { connect } from "react-redux";
 import { getProfileThunk, editProfileThunk} from '../../reducers/authReducer';
-
+import { Navigate } from 'react-router-dom';
 
 class ProfileContainer extends React.Component {
     constructor(props){
@@ -18,7 +18,7 @@ class ProfileContainer extends React.Component {
     render(){
         return (
         <div>
-            {this.props.isAuth? <Profile {...this.props} handleOnClick = {this.handleOnClick}/> : (window.location.assign('/login'))}
+            {this.props.isAuth? <Profile {...this.props} handleOnClick = {this.handleOnClick}/> : <Navigate to = '/login'/>}
         </div>
         )
     }

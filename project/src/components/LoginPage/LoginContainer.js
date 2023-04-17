@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './Login';
 import { connect } from 'react-redux';
 import { authorisationThunk } from '../../reducers/authReducer';
-
+import { Navigate } from 'react-router-dom';
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class LoginContainer extends React.Component {
     }
     render() {
         return (<div>
-            { !this.props.isAuth? <Login {...this.props} handleOnClick = {this.handleOnClick} /> : <div>тут должен быть переход</div> }
+            { !this.props.isAuth? <Login {...this.props} handleOnClick = {this.handleOnClick} /> : <Navigate to = '/groups'/> }
             </div>)
     }
    
