@@ -22,7 +22,7 @@ class HeaderForStudent extends React.Component{
                 </Nav>
             <div className="col-2 justify-content-end">
                 <Navbar.Brand>
-                <NavLink to="/profile" style={{ textDecoration: 'none',color: 'white' }}>{props.email}</NavLink>
+                <NavLink to="/profile" style={{ textDecoration: 'none',color: 'white' }}>{this.props.email}</NavLink>
                 </Navbar.Brand>
                 <Navbar.Brand>
                 <NavLink to="/" style={{ textDecoration: 'none',color: 'white'  }}>Выход</NavLink>
