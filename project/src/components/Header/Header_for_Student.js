@@ -4,9 +4,9 @@ import Nav from 'react-bootstrap/Nav';
 import { NavLink } from 'react-router-dom';
 import { Container } from "react-bootstrap";
 
-let HeaderForStudent = (props) =>{
+class HeaderForStudent extends React.Component{
+    render(){
     return (
-
         <div className='Havbar'>
                 <Navbar bg="dark" expand="md" variant="dark">
                 <Container>
@@ -32,6 +32,7 @@ let HeaderForStudent = (props) =>{
                 </Navbar>
             </div>
     )
+    }
 }
 
 export default HeaderForStudent;
