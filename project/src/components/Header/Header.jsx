@@ -12,10 +12,10 @@ class Header extends React.Component {
     ChoiceHeader(){
         if(this.props.isAuth){
             if(this.props.Role.isStudent){
-            return <HeaderForStudent email = {this.props.email}/>
+            return <HeaderForStudent email = {this.props.email} logout = {this.props.logoutThunk}/>
             }
             else if (this.props.Role.isTeacher){
-                return <HeaderForTeacher email = {this.props.email}/>
+                return <HeaderForTeacher email = {this.props.email} logout = {this.props.logoutThunk}/>
             }
             else if (this.props.Role.isAdmin){
                 return <div></div>;
@@ -24,7 +24,7 @@ class Header extends React.Component {
                 return <div></div>
             }
             else{
-                return <HeaderForAuthUser email = {this.props.email} logout = {this.props.logout}/>
+                return <HeaderForAuthUser email = {this.props.email} logout = {this.props.logoutThunk}/>
             }
         }
         else{

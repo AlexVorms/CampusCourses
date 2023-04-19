@@ -16,7 +16,7 @@ let HeaderForAuthUser = (props) =>{
                <NavLink to="/groups" style={{ textDecoration: 'none',color: 'white' }} >Группы курсов</NavLink>
                </Navbar.Brand>
            </Nav>
-       <div className="col-2 justify-content-end">
+       <div className="col-md-auto justify-content-end">
            <Navbar.Brand>
            <NavLink to="/profile" style={{ textDecoration: 'none',color: 'white' }}>{props.email}</NavLink>
            </Navbar.Brand>

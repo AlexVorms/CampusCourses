@@ -40,7 +40,7 @@ function getProfile(){
     });
 }
 
-function authorisation(email, password){
+async function authorisation(email, password){
     return instance.post('login', {
         email,
         password
@@ -88,7 +88,7 @@ function EditProfile(fullName, birthDate){
     });
 }
 
-function getUserStatus(){
+async function getUserStatus(){
     return instance.get('roles')
     .then(response => {
         return response.data;
@@ -108,6 +108,16 @@ function getCourseDetails(id){
     });
 }
 
+function getMyCourses(){
+    return instance.get('/courses/my')
+    .then(response =>{
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+
+}
 export const API = {
     getGroups: getGroups,
     getCourses: getCourses,
@@ -117,5 +127,6 @@ export const API = {
     Registration: Registration,
     EditProfile: EditProfile,
     getUserStatus: getUserStatus,
-    getCourseDetails: getCourseDetails
+    getCourseDetails: getCourseDetails,
+    getMyCourses: getMyCourses
 };

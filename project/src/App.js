@@ -9,7 +9,7 @@ import GroupConteiner from "./components/GroupPage/GroupConteiner";
 import CoursesContainer from "./components/CoursesPage/CoursesContainer";
 import LoginContainer from "./components/LoginPage/LoginContainer";
 import CourseDetailsPageContainer from "./components/CourseDetailsPage/CourseDetailsPageContainer";
-
+import MyCoursesContainer from './components/MyCoursesPage/MyCoursesContainer'
 
 const App = () =>{
   return (
@@ -24,6 +24,7 @@ const App = () =>{
         <Route path="/groups" element={<GroupConteiner/>}/>
        <Route path="/groups/:id" element={<CoursesContainer/>}/>
         <Route path = '/courses/:id' element={<CourseDetailsPageContainer/>}/>
+        <Route path = 'courses/my' element={<MyCoursesContainer/>}></Route>
       </Routes>
     </div>
    </BrowserRouter>

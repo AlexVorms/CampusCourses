@@ -1,18 +1,18 @@
 import { API } from "../Api/API";
 
-const SET_COURSES = 'SET_COURSES';
+const SET_MY_COURSES = 'SET__MY_COURSES';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 let initialState = {
-  courses:[
+  MyCourses:[
   ],
   isFetching: false
 };
-const coursesReducer = (state = initialState, action) =>{
+const MyCoursesReducer = (state = initialState, action) =>{
   switch(action.type){
-      case SET_COURSES:{
+      case SET_MY_COURSES:{
           return{
-              ...state, courses: action.courses
+              ...state, MyCourses: action.MyCourses
           }
       }
       case TOGGLE_IS_FETCHING:{
@@ -23,16 +23,16 @@ const coursesReducer = (state = initialState, action) =>{
   }
 }
 
-export const setCoursesAC = (courses) => ({type:SET_COURSES, courses})
+export const setCoursesAC = (MyCourses) => ({type:SET_MY_COURSES, MyCourses})
 export const setIsFetchingAC = (isFetching)=>({type:TOGGLE_IS_FETCHING, isFetching})
 
-export function getCoursesThunk(id){
+export  function getMyCoursesThunk(){
   return (dispatch) =>{
     dispatch(setIsFetchingAC(true));
-    API.getCourses(id).then(data =>{
-      dispatch(setCoursesAC(data));
+    API.getMyCourses().then(data =>{
+       dispatch(setCoursesAC(data));
        dispatch(setIsFetchingAC(false))
     })
   }
 }
-export default coursesReducer;
+export default MyCoursesReducer;

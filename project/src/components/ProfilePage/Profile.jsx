@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Container, Row, Col} from 'react-bootstrap';
+import Preloader from '../common/Preloader';
 
 class Profile extends React.Component{
   constructor(props){
@@ -15,7 +16,8 @@ class Profile extends React.Component{
     this.props.handleOnClick(this.fullNameRef.current.value,this.birthDateRef.current.value)
   }
   render() {
-    return (
+    return <>
+     {this.props.isFetching ? <Preloader/> : 
         <Container>
             <h1>Профиль</h1>
             <Row>
@@ -56,7 +58,8 @@ class Profile extends React.Component{
         </Form>
             </Row>
         </Container>
-    )
+      }
+        </>
   }
 }
 

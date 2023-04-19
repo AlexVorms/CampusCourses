@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {getCourseDetailsThunk} from "../../reducers/courseDetailsReducer"
 import { useParams } from 'react-router-dom';
 import CourseDetails from './CourseDetails';
-
+import { Navigate } from 'react-router-dom';
 export function withRouter(Children){
     return(props)=>{
        const match  = {params: useParams()};
@@ -17,7 +17,7 @@ class CourseDetailsPageContainer extends React.Component {
     }
     render(){
         return (<div>
-            {this.props.isAuth? <CourseDetails {...this.props}/> : null}
+            {this.props.isAuth? <CourseDetails {...this.props}/> : <Navigate to = '/login'/>}
             </div>) 
     }
 }

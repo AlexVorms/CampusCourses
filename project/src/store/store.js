@@ -137,5 +137,20 @@ let store = {
 //     }
 //   ]
 // }
+
+
+
+// [
+//   {
+//     "id": "25739b12-f517-4bdd-db61-08db2e90e277",
+//     "name": "Психология парных отношений: тренинг взаимопонимания",
+//     "startYear": 2022,
+//     "maximumStudentsCount": 200,
+//     "remainingSlotsCount": 196,
+//     "status": "OpenForAssigning",
+//     "semester": "Spring"
+//   }
+// ]
+
 export default store;
 

@@ -17,15 +17,15 @@ class HeaderForStudent extends React.Component{
                     </Navbar.Brand>
 
                     <Navbar.Brand>
-                    <NavLink  to="/groups" style={{ textDecoration: 'none',color: 'white' }} >Мои курсы</NavLink>
+                    <NavLink  to="/courses/my" style={{ textDecoration: 'none',color: 'white' }} >Мои курсы</NavLink>
                     </Navbar.Brand>
                 </Nav>
-            <div className="col-2 justify-content-end">
+            <div className="col-md-auto justify-content-end ">
                 <Navbar.Brand>
                 <NavLink to="/profile" style={{ textDecoration: 'none',color: 'white' }}>{this.props.email}</NavLink>
                 </Navbar.Brand>
                 <Navbar.Brand>
-                <NavLink to="/" style={{ textDecoration: 'none',color: 'white'  }}>Выход</NavLink>
+                <NavLink to="/" style={{ textDecoration: 'none',color: 'white'  }} onClick={this.props.logout}>Выход</NavLink>
                 </Navbar.Brand>
             </div>
         </Container> 

@@ -1,19 +1,20 @@
 import React from 'react';
-import CoursesItem from './CoursesItem';
-import Preloader from '../common/Preloader';
 
-class Courses extends React.Component {
+import Preloader from '../common/Preloader';
+import MyCoursesItem from './MyCoursesItem';
+
+class MyCourses extends React.Component {
     constructor(props) {
         super(props);
       }
       
     render() {
       return <>
-       {this.props.isFetching ? <Preloader/> : 
+       {this.props.isFetching? <Preloader/> : 
           <div className="mt-3 mb-3">
                 <div className="list-group">
-                {this.props.courses.map((value) => {
-                    return <CoursesItem name ={value.name}
+                {this.props.MyCourses.map((value) => {
+                    return <MyCoursesItem name ={value.name}
                     key = {value.id}
                     id = {value.id}
                     startYear={value.startYear}
@@ -30,5 +31,5 @@ class Courses extends React.Component {
     }
   }
   
-  export default Courses;
+  export default MyCourses;
   

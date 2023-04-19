@@ -1,10 +1,11 @@
 import React from 'react'
-import Spinner from 'react-bootstrap/Spinner';
+import preloader from './wait.gif'
 
 let Preloader = (props) =>{
     return (
-        <div className='center'>
-            <Spinner animation="border" />
+        <div className='justify-content-md-center'>
+           
+            <img src = {preloader}></img>
         </div>
     )
 }

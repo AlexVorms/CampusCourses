@@ -4,13 +4,14 @@ import coursesReducer from "../reducers/coursesReducer";
 import authReducer from "../reducers/authReducer";
 import courseDetailsReducer from "../reducers/courseDetailsReducer";
 import ThunkMiddleware from "redux-thunk";
-
+import MyCoursesReducer from "../reducers/myCoursesReducer";
 
 let reducers = combineReducers({
     groupPage: groupReducer,
     coursesPage: coursesReducer,
     auth: authReducer,
-    courseDetailsPage:courseDetailsReducer
+    courseDetailsPage:courseDetailsReducer,
+    MyCoursesPage: MyCoursesReducer
 });
 
 let store = createStore(reducers, applyMiddleware(ThunkMiddleware));

@@ -16,7 +16,9 @@ class CourseDetails extends React.Component {
                     studentsInQueueCount = {this.props.studentsInQueueCount}
                     status = {this.props.status}
                     semester = {this.props.semester}/>
-                    <RequirementsCourse requirements = {this.props.requirements}/>
+                    <RequirementsCourse requirements = {this.props.requirements}
+                    annotations = {this.props.annotations}
+                    notifications = {this.props.notifications}/>
                 </Container>
 
             </div>

@@ -5,6 +5,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const USER_IS_AUTH = 'USER_IS_AUTH';
 const PROFILE_EDIT = 'PROFILE_EDIT';
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const DELETE_DATA = 'DELETE_DATA'
 
 let initialState = {
     email: '',
@@ -15,7 +16,7 @@ let initialState = {
     Role:{
         isTeacher: false,
         isStudent: false,
-        isAdmin:false
+        isAdmin: false
     }
 };
 
@@ -45,6 +46,21 @@ const authReducer = (state = initialState, action) =>{
                 Role: action.data
             }
         }
+        case DELETE_DATA:{
+            return {
+                ...state,
+                email: '',
+                fullName:null,
+                birthDate:null,
+                isAuth: false,
+                isFetching: false,
+                Role:{
+                    isTeacher: false,
+                    isStudent: false,
+                    isAdmin: false
+                }
+            }
+        }
         default: 
             return state;
     }
@@ -56,7 +72,7 @@ export const setIsAuthorisationAC = ( email,isAuth) => ({type:USER_IS_AUTH, data
 export const setIsFetchingAC = (isFetching)=>({type:TOGGLE_IS_FETCHING, isFetching})
 export const editProfileAC = (fullName, birthDate) =>({type:PROFILE_EDIT, data:{fullName, birthDate}})
 export const setUserStatus = (data) =>({type:SET_USER_STATUS, data:data})
-
+export const deleteUserData =() =>({type:DELETE_DATA})
 // THUNKS
 
 export function getProfileThunk(){
@@ -69,7 +85,7 @@ export function getProfileThunk(){
     }
 }
 export function getUserStatusThunk(){
-    return(dispatch) =>{
+    return async(dispatch) =>{
         API.getUserStatus().then(data =>{
             console.log(data);
             dispatch(setUserStatus(data))
@@ -77,12 +93,12 @@ export function getUserStatusThunk(){
     }
 }
 export function authorisationThunk(email, password){
-    return(dispatch) => {
-        dispatch(setIsFetchingAC(true));
-        API.authorisation(email,password).then(data =>{
-            if (data == 200){
-                dispatch(getUserStatusThunk());
-            dispatch(setIsAuthorisationAC(email,true));
+    return async(dispatch) => {
+         dispatch(setIsFetchingAC(true));
+         await API.authorisation(email,password).then( async data =>{
+            if (data === 200){
+            await dispatch(getUserStatusThunk());
+             dispatch(setIsAuthorisationAC(email,true));
             dispatch(setIsFetchingAC(false));
             }
         })
@@ -93,6 +109,7 @@ export function logoutThunk(){
     return(dispatch)=> {
         API.logout().then(data =>{
             dispatch(setIsAuthorisationAC('', false));
+            dispatch(deleteUserData)
         })
     }
 }

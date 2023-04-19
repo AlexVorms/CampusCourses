@@ -30,7 +30,8 @@ export function withRouter(Children){
 let mapStateToProps = (state) =>{
     return {
         isAuth: state.auth.isAuth,
-        courses: state.coursesPage.courses
+        courses: state.coursesPage.courses,
+        isFetching: state.coursesPage.isFetching
     }
 }
 
