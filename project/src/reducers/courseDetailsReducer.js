@@ -1,5 +1,8 @@
 import { API } from "../Api/API";
+
 const SET_COURSE_DETAILS = 'SET_COURSE_DETAILS';
+const COURSE_IS_FETCHING = 'COURSE_IS_FETCHING';
+
 let initialState = {
     id: null,
     name: null,
@@ -37,6 +40,9 @@ const courseDetailsReducer = (state = initialState, action) => {
             return courseState
             
         }
+        case COURSE_IS_FETCHING:{
+            return {...state, isFetching: action.isFetching}
+        }
         default: 
             return courseState;
     }
@@ -44,15 +50,25 @@ const courseDetailsReducer = (state = initialState, action) => {
 }
 
 export const setCourseDetailsAC = (data) =>({type:SET_COURSE_DETAILS, data:data})
-
+export const setIsFetchingAC = (isFetching)=>({type:COURSE_IS_FETCHING, isFetching})
 //THUNKS
 
 export function getCourseDetailsThunk(id){
     return(dispatch)=>{
+        dispatch(setIsFetchingAC(true));
         API.getCourseDetails(id).then(data =>{
             dispatch(setCourseDetailsAC(data))
+            dispatch(setIsFetchingAC(false))
         })
     }
 }
 
+export function signUpCourseThink(id){
+    console.log(id + 'this is id in thunk')
+    return(dispatch)=>{
+        API.SignUpCourse(id).then(data => {
+            console.log(data);
+        })
+    }
+}
 export default courseDetailsReducer;

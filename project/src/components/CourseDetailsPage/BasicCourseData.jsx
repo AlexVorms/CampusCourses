@@ -1,11 +1,12 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 class BasicCourseData extends React.Component {
     constructor(props) {
         super(props);
         this.FoundSemester = this.FoundSemester.bind(this);
         this.TranslationSemester = this.TranslationSemester.bind(this);
+        this.SignUp = this.SignUp.bind(this);
       }
     FoundSemester(){
         if (this.props.semester === 'Autumn'){
@@ -36,16 +37,27 @@ class BasicCourseData extends React.Component {
             return <div className = 'text-danger'>Закрыт</div>
         }
     }
+    SignUp(){
+        console.log(this.props.id)
+        this.props.signUpCourseThink(this.props.id)
+    }
     render(){
+    
         return (
             <Card>
                 <Card.Body>
                 <ListGroup variant="flush">
                     <ListGroup.Item>
-                            <div className='col-12 '>
+                            <Row>
+                                <Col>
                                 <h5>Статус курса</h5>
                                 <div>{this.TranslationSemester()}</div>
-                            </div>
+                                </Col>
+                                <Col className="content-end">
+                                <button type="button" className="btn btn-secondary"  onClick={this.SignUp}>Записаться на курс</button>
+                                </Col >
+                            </Row>
+                           
                     </ListGroup.Item>
                     <ListGroup.Item>
                             <div className = 'row'>

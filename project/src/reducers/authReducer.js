@@ -86,22 +86,23 @@ export function getProfileThunk(){
 }
 export function getUserStatusThunk(){
     return async(dispatch) =>{
-        API.getUserStatus().then(data =>{
-            console.log(data);
-            dispatch(setUserStatus(data))
+        await API.getUserStatus().then(data =>{
+            if(data !== undefined){
+                console.log(data);
+                dispatch(setUserStatus(data))
+            }
         })
     }
 }
 export function authorisationThunk(email, password){
     return async(dispatch) => {
          dispatch(setIsFetchingAC(true));
-         await API.authorisation(email,password).then( async data =>{
-            if (data === 200){
+         let response = await API.authorisation(email,password);
+            if (response === 200){
             await dispatch(getUserStatusThunk());
-             dispatch(setIsAuthorisationAC(email,true));
-            dispatch(setIsFetchingAC(false));
+            dispatch(setIsAuthorisationAC(email,true));
+             dispatch(setIsFetchingAC(false));
             }
-        })
     }
 }
 

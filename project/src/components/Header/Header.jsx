@@ -18,7 +18,7 @@ class Header extends React.Component {
                 return <HeaderForTeacher email = {this.props.email} logout = {this.props.logoutThunk}/>
             }
             else if (this.props.Role.isAdmin){
-                return <div></div>;
+                return <HeaderForAuthUser email = {this.props.email} logout = {this.props.logoutThunk}/>;
             }
             else if (this.props.Role.isTeacher && this.props.Role.isStudent){
                 return <div></div>

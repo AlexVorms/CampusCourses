@@ -1,6 +1,7 @@
 import React from 'react';
 import CoursesItem from './CoursesItem';
 import Preloader from '../common/Preloader';
+import ModalForCreateCourse from './ModalForCreateCourse';
 
 class Courses extends React.Component {
     constructor(props) {
@@ -10,7 +11,8 @@ class Courses extends React.Component {
     render() {
       return <>
        {this.props.isFetching ? <Preloader/> : 
-          <div className="mt-3 mb-3">
+          <div className="mt-3 mb-3 container">
+             {this.props.Role.isAdmin?  <ModalForCreateCourse/>: null}
                 <div className="list-group">
                 {this.props.courses.map((value) => {
                     return <CoursesItem name ={value.name}

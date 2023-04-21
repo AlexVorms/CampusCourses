@@ -1,7 +1,7 @@
 import { API } from "../Api/API";
 
 const SET_MY_COURSES = 'SET__MY_COURSES';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const MY_COURSE_IS_FETCHING = 'MY_COURSE_IS_FETCHING';
 
 let initialState = {
   MyCourses:[
@@ -15,7 +15,7 @@ const MyCoursesReducer = (state = initialState, action) =>{
               ...state, MyCourses: action.MyCourses
           }
       }
-      case TOGGLE_IS_FETCHING:{
+      case MY_COURSE_IS_FETCHING:{
         return {...state, isFetching: action.isFetching}
     }
       default: 
@@ -24,7 +24,7 @@ const MyCoursesReducer = (state = initialState, action) =>{
 }
 
 export const setCoursesAC = (MyCourses) => ({type:SET_MY_COURSES, MyCourses})
-export const setIsFetchingAC = (isFetching)=>({type:TOGGLE_IS_FETCHING, isFetching})
+export const setIsFetchingAC = (isFetching)=>({type:MY_COURSE_IS_FETCHING, isFetching})
 
 export  function getMyCoursesThunk(){
   return (dispatch) =>{

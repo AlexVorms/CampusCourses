@@ -1,17 +1,17 @@
 import axios from 'axios';
 
  
-let token = JSON.parse(localStorage.getItem('user'));
+ let token = JSON.parse(localStorage.getItem('user'));
 
-const instance = axios.create({
+let instance = axios.create({
     baseURL:"https://camp-courses.api.kreosoft.space/",
     headers: { Authorization: `Bearer ${token}` }
 })
 
 
-function getGroups(){
+async function getGroups(){
     
-    return instance.get("groups")
+    return await instance.get("groups")
     .then(response =>{
         return response.data;
       })
@@ -41,12 +41,13 @@ function getProfile(){
 }
 
 async function authorisation(email, password){
-    return instance.post('login', {
+    return await instance.post('login', {
         email,
         password
     })
     .then(response => {
         localStorage.setItem("user", JSON.stringify(response.data.token));
+        token = JSON.parse(localStorage.getItem('user'));
         return response.status
     })
     .catch(error => {
@@ -54,10 +55,11 @@ async function authorisation(email, password){
     });
 }
 
-function logout(){
-    return instance.post('logout')
+async function logout(){
+    return await instance.post('logout')
     .then(response => {
         localStorage.removeItem("user");
+        token = ''
         return response;
     })
     .catch(error => {
@@ -89,12 +91,12 @@ function EditProfile(fullName, birthDate){
 }
 
 async function getUserStatus(){
-    return instance.get('roles')
+    return await instance.get('roles')
     .then(response => {
         return response.data;
     })
     .catch(error => {
-        console.log(error.response.data.error);
+        console.log(error.response.data.error)
     });
 }
 
@@ -118,6 +120,38 @@ function getMyCourses(){
     });
 
 }
+
+function SignUpCourse(id){
+    return instance.post('/courses/' + id + '/sign-up')
+    .then(response =>{
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
+
+function deleteGroup(id){
+    return instance.delete('/groups/' + id)
+    .then(response =>{
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
+
+function createGroup(name){
+    return instance.post('/groups', {
+        name
+    })
+    .then(response =>{
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
 export const API = {
     getGroups: getGroups,
     getCourses: getCourses,
@@ -128,5 +162,8 @@ export const API = {
     EditProfile: EditProfile,
     getUserStatus: getUserStatus,
     getCourseDetails: getCourseDetails,
-    getMyCourses: getMyCourses
+    getMyCourses: getMyCourses,
+    SignUpCourse:SignUpCourse,
+    deleteGroup: deleteGroup,
+    createGroup: createGroup
 };

@@ -7,27 +7,31 @@ class GroupItem extends React.Component {
       this.handleClick2 = this.handleClick2.bind(this);
     }
       handleClick2(){
-        this.props.delete(this.props.id)
+       console.log(this.props.id)
+       this.props.deleteGroupThunk(this.props.id)
       }
 
     render() {
      
       return (
         <div className = 'container' type="button">
-          <NavLink to = {'/groups/' + this.props.id} style={{ textDecoration: 'none', color: 'inherit' }}>
+         
                 <Card >
                      <Card.Body>
                      <div className = 'row'>
-                        <div className = 'col'>
+                     <NavLink to = {'/groups/' + this.props.id} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <div className = 'col-9'>
                           <h5>{this.props.name}</h5>
                           </div>
-                        <div className = 'col d-grid gap-2 d-md-flex justify-content-md-end'>
+                          </NavLink>
+                          {this.props.isAdmin? <div className = 'col d-grid gap-2 d-md-flex justify-content-md-end'>
+                        <button className="btn btn-outline-warning" onClick={this.handleClick2}>Редактировать</button>
                           <button className="btn btn-outline-danger" onClick={this.handleClick2}>Удалить</button>
-                        </div>
+                        </div> : null}
                         </div>
                      </Card.Body>
                 </Card>
-                </NavLink>
+               
         </div>
      
       )

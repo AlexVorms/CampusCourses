@@ -21,6 +21,12 @@ fullName
 password
 : 
 "password1"
+
+Админские креды для логина:
+gymboss@gachi.com
+B0yNextD00r
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

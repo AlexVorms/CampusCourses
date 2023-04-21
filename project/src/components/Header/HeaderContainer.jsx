@@ -14,7 +14,8 @@ let mapStateToProps = (state) => {
     return{
         isAuth:state.auth.isAuth,
         email:state.auth.email,
-        Role:state.auth.Role
+        Role:state.auth.Role,
+        isFetching: state.auth.isFetching
     }
 }
 export default connect(mapStateToProps, {logoutThunk})(HeaderContainer);

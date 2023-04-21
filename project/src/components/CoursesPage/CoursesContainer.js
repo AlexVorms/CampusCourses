@@ -31,7 +31,8 @@ let mapStateToProps = (state) =>{
     return {
         isAuth: state.auth.isAuth,
         courses: state.coursesPage.courses,
-        isFetching: state.coursesPage.isFetching
+        isFetching: state.coursesPage.isFetching,
+        Role: state.auth.Role
     }
 }
 

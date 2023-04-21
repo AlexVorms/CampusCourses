@@ -3,7 +3,8 @@ import { API } from "../Api/API";
 
 const DELETE_GROUP = 'DELETE_GROUP';
 const SET_GROUP = 'SET_GROUP';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const GROUPS_IS_FETCHING = 'GROUPS_IS_FETCHING';
+const CREATE_GROUP = 'CREATE_GROUP';
 
 let initialState = {
     group: [],
@@ -17,7 +18,7 @@ const groupReducer = (state = initialState, action) =>{
             return {
                 ...state,
                 group: state.group.map(group => {
-                    if (group.id === action.id) {
+                    if (group.id !== action.id) {
                         return {...group, name:"delete"};
                     }
                     return group;
@@ -31,7 +32,7 @@ const groupReducer = (state = initialState, action) =>{
                 }
             }
         }
-        case TOGGLE_IS_FETCHING:{
+        case GROUPS_IS_FETCHING:{
             return {...state, isFetching: action.isFetching}
         }
         default: 
@@ -42,7 +43,7 @@ const groupReducer = (state = initialState, action) =>{
 // Action creators
 export const deleteGroupAC = (id) => ({type:DELETE_GROUP, id})
 export const setGroupAC = (group) => ({type:SET_GROUP, group})
-export const setIsFetchingAC = (isFetching)=>({type:TOGGLE_IS_FETCHING, isFetching})
+export const setIsFetchingAC = (isFetching)=>({type:GROUPS_IS_FETCHING, isFetching})
 
 // Thunks
  export function getGroupsThunk(){ 
@@ -51,6 +52,24 @@ export const setIsFetchingAC = (isFetching)=>({type:TOGGLE_IS_FETCHING, isFetchi
     API.getGroups().then(data =>{
           dispatch(setGroupAC(data))
           dispatch(setIsFetchingAC(false))
+        })
+    }
+}
+
+export function addGroupThunk(name){
+    return(dispatch) => {
+        API.createGroup(name)
+        .then(data => {
+            console.log(data)
+        })
+    }
+}
+
+export function deleteGroupThunk(id){
+    return(dispatch) => {
+        API.deleteGroup(id)
+        .then(data=>{
+            console.log(data)
         })
     }
 }
