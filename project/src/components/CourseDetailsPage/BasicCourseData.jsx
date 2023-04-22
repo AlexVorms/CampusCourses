@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup,Button } from 'react-bootstrap';
+import ModalForEditStatusCourse from './ModalForEditStatusCourse';
 class BasicCourseData extends React.Component {
     constructor(props) {
         super(props);
@@ -38,8 +39,8 @@ class BasicCourseData extends React.Component {
         }
     }
     SignUp(){
-        console.log(this.props.id)
         this.props.signUpCourseThink(this.props.id)
+        alert('Вы записались на курс')
     }
     render(){
     
@@ -53,9 +54,17 @@ class BasicCourseData extends React.Component {
                                 <h5>Статус курса</h5>
                                 <div>{this.TranslationSemester()}</div>
                                 </Col>
-                                {this.props.status === 'OpenForAssigning'? <Col className="content-end">
-                                <button type="button" className="btn btn-secondary"  onClick={this.SignUp}>Записаться на курс</button>
-                                </Col > : null}
+
+                                <Col>
+                                <div className = 'col d-grid gap-2 d-md-flex justify-content-md-end'>
+                                    {this.props.status === 'OpenForAssigning'? 
+                                    <button type="button" className="btn btn-secondary"  onClick={this.SignUp}>Записаться на курс</button>
+                                    : null}
+                                    {this.props.Role.isAdmin? 
+                                    <ModalForEditStatusCourse editStatusCourseThunk= {this.props.editStatusCourseThunk} id = {this.props.id}/>
+                                     : null}
+                                </div>
+                                </Col>
                                 
                             </Row>
                            

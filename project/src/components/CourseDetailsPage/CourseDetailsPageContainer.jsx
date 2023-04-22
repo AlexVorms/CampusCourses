@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {getCourseDetailsThunk, signUpCourseThink} from "../../reducers/courseDetailsReducer"
+import {getCourseDetailsThunk, signUpCourseThink, editStatusCourseThunk} from "../../reducers/courseDetailsReducer"
 import { useParams } from 'react-router-dom';
 import CourseDetails from './CourseDetails';
 import { Navigate } from 'react-router-dom';
@@ -38,9 +38,10 @@ let mapStateToProps = (state) =>{
         semester: state.courseDetailsPage.semester,
         students:state.courseDetailsPage.students,
         teachers:state.courseDetailsPage.teachers,
-        notifications:state.courseDetailsPage.notifications
+        notifications:state.courseDetailsPage.notifications,
+        Role: state.auth.Role
     }
 }
 
 let WithUrlDataContainerComponent = withRouter(CourseDetailsPageContainer);
-export default connect(mapStateToProps, {getCourseDetailsThunk, signUpCourseThink})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, {getCourseDetailsThunk, signUpCourseThink, editStatusCourseThunk})(WithUrlDataContainerComponent);

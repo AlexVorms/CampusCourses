@@ -20,12 +20,16 @@ class CourseDetails extends React.Component {
                     status = {this.props.status}
                     semester = {this.props.semester}
                     signUpCourseThink = {this.props.signUpCourseThink}
-                    id = {this.props.id}/>
+                    id = {this.props.id}
+                    Role = {this.props.Role}
+                    editStatusCourseThunk = {this.props.editStatusCourseThunk}/>
                     <RequirementsCourse requirements = {this.props.requirements}
                     annotations = {this.props.annotations}
-                    notifications = {this.props.notifications}/>
+                    notifications = {this.props.notifications}
+                    Role = {this.props.Role}/>
                     <TeachersCourseData students = {this.props.students}
-                    teachers = {this.props.teachers}/>
+                    teachers = {this.props.teachers}
+                    Role = {this.props.Role}/>
                 </Container>
 
             </div>

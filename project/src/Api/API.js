@@ -103,6 +103,7 @@ async function getUserStatus(){
 function getCourseDetails(id){
     return instance.get('courses/' + id + '/details')
     .then(response => {
+        console.log(response.data)
         return response.data;
     })
     .catch(error => {
@@ -195,6 +196,18 @@ function createCourse(groupId, data){
         console.log(error);
     });
 }
+
+function editStatusCourse(id,status){
+    return instance.post('/courses/' + id + '/status', {
+        status
+    })
+    .then(response =>{
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
 export const API = {
     getGroups: getGroups,
     getCourses: getCourses,
@@ -212,5 +225,6 @@ export const API = {
     getListAllUsers: getListAllUsers,
     createCourse: createCourse,
     getMyTeachingCourses: getMyTeachingCourses,
-    editGroup: editGroup
+    editGroup: editGroup,
+    editStatusCourse:editStatusCourse
 };

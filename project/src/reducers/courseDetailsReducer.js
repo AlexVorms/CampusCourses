@@ -71,4 +71,12 @@ export function signUpCourseThink(id){
         })
     }
 }
+
+export function editStatusCourseThunk(id, status){
+    return(dispatch) => {
+        API.editStatusCourse(id,status).then(data => {
+            console.log(data);
+        })
+    }
+}
 export default courseDetailsReducer;
