@@ -45,6 +45,7 @@ export const deleteGroupAC = (id) => ({type:DELETE_GROUP, id})
 export const setGroupAC = (group) => ({type:SET_GROUP, group})
 export const setIsFetchingAC = (isFetching)=>({type:GROUPS_IS_FETCHING, isFetching})
 
+//Можно улучшить сделав AC 
 // Thunks
  export function getGroupsThunk(){ 
     return (dispatch) => {
@@ -60,7 +61,7 @@ export function addGroupThunk(name){
     return(dispatch) => {
         API.createGroup(name)
         .then(data => {
-            console.log(data)
+           
         })
     }
 }
@@ -69,7 +70,16 @@ export function deleteGroupThunk(id){
     return(dispatch) => {
         API.deleteGroup(id)
         .then(data=>{
-            console.log(data)
+            
+        })
+    }
+}
+
+export function editGroupThunk(name,id){
+    return(dispatch) => {
+        API.editGroup(name,id)
+        .then(data => {
+            
         })
     }
 }

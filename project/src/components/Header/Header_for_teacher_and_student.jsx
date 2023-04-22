@@ -4,7 +4,7 @@ import { Navbar } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import { Container } from "react-bootstrap";
 
-class HeaderForTeacher extends React.Component {
+class HeaderForTeacherAndStudent extends React.Component {
     render(){
         return(
             <div className='Havbar'>
@@ -17,9 +17,14 @@ class HeaderForTeacher extends React.Component {
                 </Navbar.Brand>
 
                 <Navbar.Brand>
+                    <NavLink  to="/courses/my" style={{ textDecoration: 'none',color: 'white' }} >Мои курсы</NavLink>
+                    </Navbar.Brand>
+
+                <Navbar.Brand>
                 <NavLink  to="/courses/teaching" style={{ textDecoration: 'none',color: 'white' }} >Преподаваемые курсы</NavLink>
                 </Navbar.Brand>
             </Nav>
+
         <div className="col-md-auto justify-content-end">
             <Navbar.Brand>
             <NavLink to="/profile" style={{ textDecoration: 'none',color: 'white' }}>{this.props.email}</NavLink>
@@ -35,4 +40,4 @@ class HeaderForTeacher extends React.Component {
     }
 }
 
-export default HeaderForTeacher
+export default HeaderForTeacherAndStudent

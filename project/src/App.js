@@ -10,6 +10,7 @@ import CoursesContainer from "./components/CoursesPage/CoursesContainer";
 import LoginContainer from "./components/LoginPage/LoginContainer";
 import CourseDetailsPageContainer from "./components/CourseDetailsPage/CourseDetailsPageContainer";
 import MyCoursesContainer from './components/MyCoursesPage/MyCoursesContainer'
+import MyTeachingCoursesContainer from "./components/MyTeachingCoursesPage/MyTeachingCoursesContainer";
 
 const App = () =>{
   return (
@@ -25,6 +26,7 @@ const App = () =>{
        <Route path="/groups/:id" element={<CoursesContainer/>}/>
         <Route path = '/courses/:id' element={<CourseDetailsPageContainer/>}/>
         <Route path = 'courses/my' element={<MyCoursesContainer/>}></Route>
+        <Route path = 'courses/teaching' element={<MyTeachingCoursesContainer/>}></Route>
       </Routes>
     </div>
    </BrowserRouter>

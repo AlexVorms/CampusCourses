@@ -31,7 +31,9 @@ class Group extends React.Component {
             
             <div className="list-group p-2">
             {this.props.group.map((value) => {
-                return <div key = {value.id}> <GroupItem deleteGroupThunk = {this.props.deleteGroupThunk} name = {value.name}
+                return <div key = {value.id}> <GroupItem deleteGroupThunk = {this.props.deleteGroupThunk} 
+                editGroupThunk = {this.props.editGroupThunk}
+                name = {value.name}
                 key = {value.id}
                 id = {value.id}
                 isAdmin = {this.props.Role.isAdmin}/>

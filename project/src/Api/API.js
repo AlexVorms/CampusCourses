@@ -121,6 +121,18 @@ function getMyCourses(){
 
 }
 
+function getMyTeachingCourses(){
+    return instance.get('/courses/teaching')
+    .then(response =>{
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+
+}
+
+
 function SignUpCourse(id){
     return instance.post('/courses/' + id + '/sign-up')
     .then(response =>{
@@ -152,6 +164,19 @@ function createGroup(name){
         console.log(error);
     });
 }
+
+function editGroup(name, id){
+    return instance.put('/groups/' + id, {
+        name
+    })
+    .then(response =>{
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
+
 function getListAllUsers(){
     return instance.get('/users')
     .then(response =>{
@@ -185,5 +210,7 @@ export const API = {
     deleteGroup: deleteGroup,
     createGroup: createGroup,
     getListAllUsers: getListAllUsers,
-    createCourse: createCourse
+    createCourse: createCourse,
+    getMyTeachingCourses: getMyTeachingCourses,
+    editGroup: editGroup
 };

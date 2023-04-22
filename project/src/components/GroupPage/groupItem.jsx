@@ -1,13 +1,13 @@
 import React from 'react';
 import {Card} from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
+import ModalForEditGroup from './ModalForEditGroup';
 class GroupItem extends React.Component {
     constructor(props) {
       super(props);
       this.handleClick2 = this.handleClick2.bind(this);
     }
       handleClick2(){
-       console.log(this.props.id)
        this.props.deleteGroupThunk(this.props.id)
       }
 
@@ -24,8 +24,9 @@ class GroupItem extends React.Component {
                           <h5>{this.props.name}</h5>
                           </div>
                           </NavLink>
-                          {this.props.isAdmin? <div className = 'col d-grid gap-2 d-md-flex justify-content-md-end'>
-                        <button className="btn btn-outline-warning" onClick={this.handleClick2}>Редактировать</button>
+                          {this.props.isAdmin? 
+                          <div className = 'col d-grid gap-2 d-md-flex justify-content-md-end'>
+                        <ModalForEditGroup editGroupThunk = {this.props.editGroupThunk} id={this.props.id}/>
                           <button className="btn btn-outline-danger" onClick={this.handleClick2}>Удалить</button>
                         </div> : null}
                         </div>

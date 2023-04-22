@@ -53,9 +53,10 @@ class BasicCourseData extends React.Component {
                                 <h5>Статус курса</h5>
                                 <div>{this.TranslationSemester()}</div>
                                 </Col>
-                                <Col className="content-end">
+                                {this.props.status === 'OpenForAssigning'? <Col className="content-end">
                                 <button type="button" className="btn btn-secondary"  onClick={this.SignUp}>Записаться на курс</button>
-                                </Col >
+                                </Col > : null}
+                                
                             </Row>
                            
                     </ListGroup.Item>

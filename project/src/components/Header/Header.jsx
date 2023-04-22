@@ -3,6 +3,7 @@ import HeaderForUser from './Header_for_user';
 import HeaderForAuthUser from './Header_for_authUser'
 import HeaderForStudent from './Header_for_Student'
 import HeaderForTeacher from "./Header_for_teacher";
+import HeaderForTeacherAndStudent from './Header_for_teacher_and_student';
 
 class Header extends React.Component {
     constructor(props){
@@ -11,17 +12,14 @@ class Header extends React.Component {
     }
     ChoiceHeader(){
         if(this.props.isAuth){
-            if(this.props.Role.isStudent){
+            if(this.props.Role.isStudent && !this.props.Role.isTeacher){
             return <HeaderForStudent email = {this.props.email} logout = {this.props.logoutThunk}/>
             }
-            else if (this.props.Role.isTeacher){
+            else if (this.props.Role.isTeacher && !this.props.Role.isStudent){
                 return <HeaderForTeacher email = {this.props.email} logout = {this.props.logoutThunk}/>
             }
-            else if (this.props.Role.isAdmin){
-                return <HeaderForAuthUser email = {this.props.email} logout = {this.props.logoutThunk}/>;
-            }
             else if (this.props.Role.isTeacher && this.props.Role.isStudent){
-                return <div></div>
+                return <HeaderForTeacherAndStudent email = {this.props.email} logout = {this.props.logoutThunk}/>
             }
             else{
                 return <HeaderForAuthUser email = {this.props.email} logout = {this.props.logoutThunk}/>

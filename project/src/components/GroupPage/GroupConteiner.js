@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React from 'react';
 import Group from './group'
-import { deleteGroupThunk, getGroupsThunk, addGroupThunk } from "../../reducers/groupReducer";
+import { deleteGroupThunk, getGroupsThunk, addGroupThunk, editGroupThunk } from "../../reducers/groupReducer";
 import { Navigate } from "react-router-dom"
 
 class GroupContainer extends React.Component {
@@ -27,4 +27,4 @@ let mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps, {deleteGroupThunk,getGroupsThunk, addGroupThunk })(GroupContainer);
+export default connect(mapStateToProps, {deleteGroupThunk,getGroupsThunk, addGroupThunk, editGroupThunk })(GroupContainer);
