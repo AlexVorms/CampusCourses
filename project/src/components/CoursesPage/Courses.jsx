@@ -12,7 +12,8 @@ class Courses extends React.Component {
       return <>
        {this.props.isFetching ? <Preloader/> : 
           <div className="mt-3 mb-3 container">
-             {this.props.Role.isAdmin?  <ModalForCreateCourse/>: null}
+             {this.props.Role.isAdmin?  <ModalForCreateCourse users = {this.props.users} addCourseThunk = {this.props.addCourseThunk} 
+             groupId = {this.props.groupId}/>: null}
                 <div className="list-group">
                 {this.props.courses.map((value) => {
                     return <CoursesItem name ={value.name}

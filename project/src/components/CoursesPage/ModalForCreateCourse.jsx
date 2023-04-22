@@ -1,20 +1,47 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {Row, Col} from 'react-bootstrap'
+import { EditorState, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+
 
 class ModalForCreateCourse extends React.Component{
     constructor(props){
         super(props);
-        this.state = {show: false};
+        this.state = {
+          show: false,
+          editorState: EditorState.createEmpty(),
+          editorState1: EditorState.createEmpty(),
+          selectValue: '',
+          selectSemester:''
+        };
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
          this.handleSubmit = this.handleSubmit.bind(this);
+
          this.nameRef = React.createRef();
+        this.yearRef = React.createRef();
+        this.maximumStudentsCountRef = React.createRef();
+
+         this.onEditorStateChange = this.onEditorStateChange.bind(this);
+         this.onEditorStateChange1 = this.onEditorStateChange1.bind(this);
     }
     
-    
+    onEditorStateChange = (editorState) => {
+      this.setState({
+        editorState,
+      });
+    };
+
+    onEditorStateChange1 = (editorState1) => {
+      this.setState({
+        editorState1,
+      });
+    };
+
    handleClose(){
     this.setState({show: false});
     }
@@ -22,17 +49,47 @@ class ModalForCreateCourse extends React.Component{
         this.setState({show: true});
     }
     handleSubmit() {
-      console.log('Отправленное имя: ' + this.nameRef.current.value);
+      let name1 = this.nameRef.current.value,
+      startYear1 = Number(this.yearRef.current.value),
+      maximumStudentsCount1 = Number(this.maximumStudentsCountRef.current.value),
+      semester1 = this.state.selectSemester,
+      requirements1 = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
+      annotations1 = draftToHtml(convertToRaw(this.state.editorState1.getCurrentContent())),
+      mainTeacherId1 = this.state.selectValue;
+
+      let data = {
+        name: name1,
+        startYear: startYear1,
+        maximumStudentsCount: maximumStudentsCount1,
+        semester: semester1,
+        requirements: requirements1,
+        annotations : annotations1,
+        mainTeacherId: mainTeacherId1
+      }
+      console.log(this.props.groupId)
+      console.log(data)
+      this.props.addCourseThunk(this.props.groupId, data)
       this.handleClose();
     }
+
+    callThis = (e) => {
+      this.setState({selectValue: e.target.value});
+    }
+
+    callThisSemester = (e) => {
+      this.setState({selectSemester: e.target.id});
+    }
+
     render(){
+      const { editorState } = this.state;
+      const { editorState1 } = this.state;
   return (
     <>
       <Button variant="outline-primary" onClick={this.handleShow}>
        Создать курс
       </Button>
 
-      <Modal show={this.state.show} onHide={this.handleClose}>
+      <Modal show={this.state.show} onHide={this.handleClose} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Создание курса</Modal.Title>
         </Modal.Header>
@@ -51,7 +108,7 @@ class ModalForCreateCourse extends React.Component{
               <Form.Control
                 type="name"
                 autoFocus
-                ref={this.nameRef}/>
+                ref={this.yearRef}/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
@@ -59,12 +116,12 @@ class ModalForCreateCourse extends React.Component{
               <Form.Control
                 type="name"
                 autoFocus
-                ref={this.nameRef}/>
+                ref={this.maximumStudentsCountRef}/>
             </Form.Group>
 
             
 
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3" onChange={this.callThisSemester}>
               <Form.Label>Семестр</Form.Label>
               <Row>
                 <Col>
@@ -89,6 +146,32 @@ class ModalForCreateCourse extends React.Component{
               
          
             </Form.Group>
+
+            <div>
+            <Editor
+              editorState={editorState}
+              wrapperClassName="demo-wrapper"
+              editorClassName="demo-editor"
+              onEditorStateChange={this.onEditorStateChange}
+            />
+          </div>
+
+          <div>
+            <Editor
+              editorState={editorState1}
+              wrapperClassName="demo-wrapper"
+              editorClassName="demo-editor"
+              onEditorStateChange={this.onEditorStateChange1}
+            />
+          </div>
+
+          <Form.Select aria-label="Default select example" onChange={this.callThis}>
+      <option>Преподаватель</option>
+      {this.props.users.map((user) => {
+                    return <option value={user.id} key = {user.id}>{user.fullName}</option>  
+                })
+                }
+    </Form.Select>
 
           </Form>
         </Modal.Body>

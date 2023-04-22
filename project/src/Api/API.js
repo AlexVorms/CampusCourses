@@ -152,6 +152,24 @@ function createGroup(name){
         console.log(error);
     });
 }
+function getListAllUsers(){
+    return instance.get('/users')
+    .then(response =>{
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
+function createCourse(groupId, data){
+    return instance.post('/courses/' + groupId, data)
+    .then(response =>{
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
 export const API = {
     getGroups: getGroups,
     getCourses: getCourses,
@@ -165,5 +183,7 @@ export const API = {
     getMyCourses: getMyCourses,
     SignUpCourse:SignUpCourse,
     deleteGroup: deleteGroup,
-    createGroup: createGroup
+    createGroup: createGroup,
+    getListAllUsers: getListAllUsers,
+    createCourse: createCourse
 };

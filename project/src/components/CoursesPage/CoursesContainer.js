@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { getCoursesThunk } from "../../reducers/coursesReducer";
+import { getCoursesThunk, getListAllUsersThunk, addCourseThunk } from "../../reducers/coursesReducer";
 import Courses from "./Courses";
 import { useParams } from 'react-router-dom';
 import React from "react";
@@ -19,11 +19,14 @@ export function withRouter(Children){
     }
     componentDidMount(){
             this.props.getCoursesThunk(this.props.match.params.id);
+            if (this.props.Role.isAdmin){
+                this.props.getListAllUsersThunk();
+            }
       }
 
       render(){
         return (<div>
-             {this.props.isAuth? <Courses {...this.props}/> : <Navigate to = '/login'/>}
+             {this.props.isAuth? <Courses {...this.props} groupId = {this.props.match.params.id}/> : <Navigate to = '/login'/>}
              </div>)
       }
  }
@@ -32,9 +35,10 @@ let mapStateToProps = (state) =>{
         isAuth: state.auth.isAuth,
         courses: state.coursesPage.courses,
         isFetching: state.coursesPage.isFetching,
-        Role: state.auth.Role
+        Role: state.auth.Role,
+        users: state.coursesPage.users
     }
 }
 
 let WithUrlDataContainerComponent = withRouter(CoursesContainer);
-export default connect(mapStateToProps, { getCoursesThunk})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, { getCoursesThunk, getListAllUsersThunk, addCourseThunk})(WithUrlDataContainerComponent);
