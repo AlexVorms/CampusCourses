@@ -95,14 +95,21 @@ export function getUserStatusThunk(){
     }
 }
 export function authorisationThunk(email, password){
-    return async(dispatch) => {
+    return (dispatch) => {
          dispatch(setIsFetchingAC(true));
-         let response = await API.authorisation(email,password);
+        API.authorisation(email,password).then(response =>{
             if (response === 200){
-            await dispatch(getUserStatusThunk());
+            dispatch(getUserStatusThunk());
             dispatch(setIsAuthorisationAC(email,true));
              dispatch(setIsFetchingAC(false));
             }
+            else{
+                console.log(response)
+                alert('Неверное имя пользователя или пароль')
+                dispatch(setIsFetchingAC(false));
+            }
+        }
+     )
     }
 }
 

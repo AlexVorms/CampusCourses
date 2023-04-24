@@ -1,23 +1,11 @@
 import React from "react";
 
 import { Card, ListGroup, Tab, Tabs, Row, Col } from "react-bootstrap";
+import StudentsList from "./StudentsList";
 
 class TeachersCourseData extends React.Component {
     constructor(props){
         super(props);
-        this.TranslationStatus = this.TranslationStatus.bind(this);
-        this.midtermResult = this.midtermResult.bind(this);
-    }
-    TranslationStatus(status){
-        if(status === 'Accepted'){
-            return <div className='text-success'>Статус - принят в группу</div>
-        }
-    }
-    midtermResult(result){
-        
-        if (result === null){
-            return  <span className="badge text-bg-secondary">Отметки нет</span>
-        }
     }
     render(){
         return (
@@ -47,24 +35,17 @@ class TeachersCourseData extends React.Component {
                         <Tab eventKey="profile" title="Студенты">
                         <Card>  
                         {this.props.students.map((value) => {
-                         return <ListGroup variant="flush"  key = {value.id}>
-                            <ListGroup.Item>
-                                <Row>
-                                    <Col>
-                                        <h6>{value.name}</h6>
-                                        <div>{this.TranslationStatus(value.status)}</div>
-                                        <div className = 'text-muted'>{value.email}</div>
-                                    </Col>
-                                    <Col>
-                                    <div>Промежуточная аттестация - {this.midtermResult(value.midtermResult)}</div>
-                                    </Col>
-                                    <Col>
-                                    <div>Финальная аттестация - {this.midtermResult(value.finalResult)}</div>
-                                    </Col>
-                                </Row>
-                            
-                            </ListGroup.Item>
-                         </ListGroup>
+                         return <StudentsList
+                            studentId = {value.id}
+                            courseId = {this.props.id}
+                            name = {value.name}
+                            status = {value.status}
+                            email = {value.email}
+                            Role = {this.props.Role}
+                            midtermResult = {value.midtermResult}
+                            finalResult = {value.finalResult}
+                           editStudentStatusThunk = {this.props.editStudentStatusThunk}
+                         />
                         })
                          }
                          </Card> 

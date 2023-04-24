@@ -40,8 +40,8 @@ function getProfile(){
     });
 }
 
-async function authorisation(email, password){
-    return await instance.post('login', {
+function authorisation(email, password){
+    return instance.post('login', {
         email,
         password
     })
@@ -52,6 +52,7 @@ async function authorisation(email, password){
     })
     .catch(error => {
         console.log(error.response.data.error);
+        return error.response.data.error
     });
 }
 
@@ -208,6 +209,19 @@ function editStatusCourse(id,status){
         console.log(error);
     });
 }
+
+function editStudentStatus(id, studentId, status){
+    return instance.post('/courses/' + id + '/student-status/' + studentId, {
+        status
+    })
+    .then(response =>{
+        console.log('смена статуса студента')
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
 export const API = {
     getGroups: getGroups,
     getCourses: getCourses,
@@ -226,5 +240,6 @@ export const API = {
     createCourse: createCourse,
     getMyTeachingCourses: getMyTeachingCourses,
     editGroup: editGroup,
-    editStatusCourse:editStatusCourse
+    editStatusCourse:editStatusCourse,
+    editStudentStatus: editStudentStatus
 };

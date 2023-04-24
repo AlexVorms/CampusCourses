@@ -27,6 +27,22 @@ gymboss@gachi.com
 B0yNextD00r
 
 
+birthDate
+: 
+"2003-04-03"
+confirmPassword
+: 
+"sergey1"
+email
+: 
+"sergeycruchcov@mail.ru"
+fullName
+: 
+"Сергей Иванович Крючков"
+password
+: 
+"sergey1"
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

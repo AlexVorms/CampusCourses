@@ -29,7 +29,9 @@ class CourseDetails extends React.Component {
                     Role = {this.props.Role}/>
                     <TeachersCourseData students = {this.props.students}
                     teachers = {this.props.teachers}
-                    Role = {this.props.Role}/>
+                    Role = {this.props.Role}
+                    id = {this.props.id}
+                    editStudentStatusThunk = {this.props.editStudentStatusThunk}/>
                 </Container>
 
             </div>

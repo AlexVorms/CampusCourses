@@ -2,6 +2,7 @@ import { API } from "../Api/API";
 
 const SET_COURSE_DETAILS = 'SET_COURSE_DETAILS';
 const COURSE_IS_FETCHING = 'COURSE_IS_FETCHING';
+const CHANGE_STUDENT_STATUS = 'CHANGE_STUDENT_STATUS';
 
 let initialState = {
     id: null,
@@ -22,6 +23,7 @@ let initialState = {
 
 const courseDetailsReducer = (state = initialState, action) => {
     let courseState = {...state};
+    courseState.students = [...state.students];
     switch(action.type){
         case SET_COURSE_DETAILS:{
             courseState.id = action.data.id
@@ -43,6 +45,17 @@ const courseDetailsReducer = (state = initialState, action) => {
         case COURSE_IS_FETCHING:{
             return {...state, isFetching: action.isFetching}
         }
+        case CHANGE_STUDENT_STATUS:{
+            courseState.students = state.students.map(n => {
+                if(n.id === action.id){
+                    var studentCopy = { ...n };
+                    studentCopy.status = action.status;
+                    return studentCopy;
+                }
+                return n;
+            });
+            return courseState;
+        }
         default: 
             return courseState;
     }
@@ -51,6 +64,7 @@ const courseDetailsReducer = (state = initialState, action) => {
 
 export const setCourseDetailsAC = (data) =>({type:SET_COURSE_DETAILS, data:data})
 export const setIsFetchingAC = (isFetching)=>({type:COURSE_IS_FETCHING, isFetching})
+export const editStudentStatusAC = (id, status) => ({type:CHANGE_STUDENT_STATUS, id,status})
 //THUNKS
 
 export function getCourseDetailsThunk(id){
@@ -64,7 +78,6 @@ export function getCourseDetailsThunk(id){
 }
 
 export function signUpCourseThink(id){
-    console.log(id + 'this is id in thunk')
     return(dispatch)=>{
         API.SignUpCourse(id).then(data => {
             console.log(data);
@@ -76,6 +89,15 @@ export function editStatusCourseThunk(id, status){
     return(dispatch) => {
         API.editStatusCourse(id,status).then(data => {
             console.log(data);
+        })
+    }
+}
+
+export function editStudentStatusThunk(id, studentId, status){
+    return(dispatch) => {
+        API.editStudentStatus(id, studentId, status).then(data => {
+            console.log(data);
+            dispatch(editStudentStatusAC(studentId, status))
         })
     }
 }
