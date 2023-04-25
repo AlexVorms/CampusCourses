@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { getCoursesThunk, getListAllUsersThunk, addCourseThunk } from "../../reducers/coursesReducer";
+import { getCoursesThunk, getListAllUsersThunk, addCourseThunk, deleteCourseThunk } from "../../reducers/coursesReducer";
 import Courses from "./Courses";
 import { useParams } from 'react-router-dom';
 import React from "react";
@@ -41,4 +41,4 @@ let mapStateToProps = (state) =>{
 }
 
 let WithUrlDataContainerComponent = withRouter(CoursesContainer);
-export default connect(mapStateToProps, { getCoursesThunk, getListAllUsersThunk, addCourseThunk})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, { getCoursesThunk, getListAllUsersThunk, addCourseThunk, deleteCourseThunk})(WithUrlDataContainerComponent);

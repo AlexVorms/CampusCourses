@@ -215,7 +215,67 @@ function editStudentStatus(id, studentId, status){
         status
     })
     .then(response =>{
-        console.log('смена статуса студента')
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
+
+function editStudentMark(id, studentId, markType, mark){
+    return instance.post('/courses/' + id + '/marks/' + studentId,{
+        markType,
+        mark
+    })
+    .then(response =>{
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
+
+function editCourse(id, requirements, annotations){
+    return instance.put('/courses/' + id, {
+        requirements,
+        annotations
+    })
+    .then(response =>{
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
+
+function deleteCourse(id){
+    return instance.delete('/courses/' + id)
+    .then(response =>{
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
+
+function AddTeacher(id, userId){
+    return instance.post('/courses/' + id + '/teachers', {
+        userId
+    })
+    .then(response =>{
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+    });
+}
+
+function AddNotification(id, text,isImportant){
+    return instance.post('/courses/' + id + '/notifications', {
+        text,
+        isImportant
+    })
+    .then(response =>{
         return response;
       })
       .catch(error => {
@@ -241,5 +301,10 @@ export const API = {
     getMyTeachingCourses: getMyTeachingCourses,
     editGroup: editGroup,
     editStatusCourse:editStatusCourse,
-    editStudentStatus: editStudentStatus
+    editStudentStatus: editStudentStatus,
+    editStudentMark: editStudentMark,
+    editCourse: editCourse,
+    deleteCourse: deleteCourse,
+    AddTeacher: AddTeacher,
+    AddNotification:  AddNotification
 };

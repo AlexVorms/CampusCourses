@@ -1,7 +1,9 @@
 import React from "react";
-import Nav from 'react-bootstrap/Nav';
-import { Card, ListGroup, Tab, Tabs, Badge } from "react-bootstrap";
-import {Row, Container } from "react-bootstrap"
+
+import { Card, ListGroup, Tab, Tabs,Col} from "react-bootstrap";
+
+import ModalForAddNotifications from "./ModalForAddNotifications";
+
 class RequirementsCourse extends React.Component {
     
     render(){
@@ -19,12 +21,19 @@ class RequirementsCourse extends React.Component {
                         <div className="card-text" dangerouslySetInnerHTML={{ __html: this.props.annotations}}></div>
                         </Tab>
                         <Tab eventKey="contact" title="Уведомления" >
-                         <Card>  
+                        <Card className='p-2'>  
+                            
+                            {this.props.Role.isAdmin?  <Col className='p-2'> <ModalForAddNotifications id = {this.props.id} 
+                            AddNotificationsThunk = {this.props.AddNotificationsThunk}/></Col> : null}
+                        
                         {this.props.notifications.map((value) => {
-                         return <ListGroup variant="flush" >
-                            <ListGroup.Item>
+                         return <ListGroup  variant="flush" key = {value.text}>
+                            {value.isImportant? <ListGroup.Item variant="primary">
                                 {value.text}
-                            </ListGroup.Item>
+                            </ListGroup.Item> : <ListGroup.Item >
+                                {value.text}
+                            </ListGroup.Item>}
+                            
                          </ListGroup>
                         })
                          }

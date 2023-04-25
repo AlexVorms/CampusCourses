@@ -3,6 +3,10 @@ import { API } from "../Api/API";
 const SET_COURSE_DETAILS = 'SET_COURSE_DETAILS';
 const COURSE_IS_FETCHING = 'COURSE_IS_FETCHING';
 const CHANGE_STUDENT_STATUS = 'CHANGE_STUDENT_STATUS';
+const CHANGE_STUDENT_MIDTERM_RESULT = 'CHANGE_STUDENT_MIDTERM_RESULT';
+const CHANGE_STUDENT_FINAL_RESULT = 'CHANGE_STUDENT_FINAL_RESULT';
+const EDIT_COURSE = 'EDIT_COURSE';
+const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 
 let initialState = {
     id: null,
@@ -24,6 +28,7 @@ let initialState = {
 const courseDetailsReducer = (state = initialState, action) => {
     let courseState = {...state};
     courseState.students = [...state.students];
+    courseState.teachers = [...state.teachers];
     switch(action.type){
         case SET_COURSE_DETAILS:{
             courseState.id = action.data.id
@@ -56,6 +61,37 @@ const courseDetailsReducer = (state = initialState, action) => {
             });
             return courseState;
         }
+        case CHANGE_STUDENT_FINAL_RESULT:{
+            courseState.students = state.students.map(n => {
+                if(n.id === action.id){
+                    var studentCopy = { ...n };
+                    studentCopy.finalResult = action.finalResult;
+                    return studentCopy;
+                }
+                return n;
+            });
+            return courseState;
+        }
+        case CHANGE_STUDENT_MIDTERM_RESULT:{
+            courseState.students = state.students.map(n => {
+                if(n.id === action.id){
+                    var studentCopy = { ...n };
+                    studentCopy.midtermResult = action.midtermResult;
+                    return studentCopy;
+                }
+                return n;
+            });
+            return courseState;
+        }
+        case EDIT_COURSE:{
+            courseState.requirements = action.data.requirements
+            courseState.annotations = action.data.annotations
+            return courseState
+        }
+        case ADD_NOTIFICATION:{
+            courseState.notifications.push(action.data)
+            return courseState
+        }
         default: 
             return courseState;
     }
@@ -65,6 +101,10 @@ const courseDetailsReducer = (state = initialState, action) => {
 export const setCourseDetailsAC = (data) =>({type:SET_COURSE_DETAILS, data:data})
 export const setIsFetchingAC = (isFetching)=>({type:COURSE_IS_FETCHING, isFetching})
 export const editStudentStatusAC = (id, status) => ({type:CHANGE_STUDENT_STATUS, id,status})
+export const editStudentFinalMarkAC = (id, finalResult) => ({type:CHANGE_STUDENT_FINAL_RESULT, id, finalResult})
+export const editStudentMidtermMarkAC = (id, midtermResult) => ({type: CHANGE_STUDENT_MIDTERM_RESULT, id, midtermResult})
+export const editCourseAC = (requirements, annotations) => ({type: EDIT_COURSE, data:{requirements, annotations}})
+export const AddNotificationAC = (text, isImportant) => ({type:ADD_NOTIFICATION, data:{text, isImportant}})
 //THUNKS
 
 export function getCourseDetailsThunk(id){
@@ -98,6 +138,47 @@ export function editStudentStatusThunk(id, studentId, status){
         API.editStudentStatus(id, studentId, status).then(data => {
             console.log(data);
             dispatch(editStudentStatusAC(studentId, status))
+        })
+    }
+}
+
+export function editStudentMarkThunk(courseId, studentId, markType, mark ){
+    return(dispatch)=>{
+        API.editStudentMark(courseId, studentId, markType, mark).then(data => {
+            console.log(data);
+            if(markType === 'Midterm'){
+                dispatch(editStudentMidtermMarkAC(studentId,mark))
+            }
+            else if (markType === 'Final'){
+                dispatch(editStudentFinalMarkAC(studentId,mark))
+            }
+        })
+    }
+}
+
+export function editCourseThunk(id, requirements, annotations){
+    return(dispatch)=>{
+        API.editCourse(id, requirements, annotations).then(data => {
+            console.log(data);
+            dispatch(editCourseAC(requirements, annotations))
+        })
+    }
+}
+
+export function addTeacherThunk(id, userId){
+    return(dispatch) => {
+        API.AddTeacher(id, userId).then(data => {
+            console.log(data)
+            dispatch(getCourseDetailsThunk(id))
+        })
+    }
+}
+
+export function AddNotificationsThunk(id, text, isImportant){
+    return(dispatch) => {
+        API.AddNotification(id, text, isImportant).then(data => {
+            console.log(data)
+            dispatch(AddNotificationAC(text, isImportant))
         })
     }
 }

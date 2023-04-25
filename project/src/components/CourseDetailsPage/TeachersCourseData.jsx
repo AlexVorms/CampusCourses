@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Card, ListGroup, Tab, Tabs, Row, Col } from "react-bootstrap";
+import { Card, ListGroup, Tab, Tabs, Row, Col, Button } from "react-bootstrap";
 import StudentsList from "./StudentsList";
+import ModalForAddTeacher from "./ModalForAddTeacher";
 
 class TeachersCourseData extends React.Component {
     constructor(props){
@@ -16,7 +17,10 @@ class TeachersCourseData extends React.Component {
                         className="mb-3"
                         justify>
                         <Tab eventKey="home" title="Преподаватели">
-                            <Card>  
+                            <Card className='p-2'>  
+                            {this.props.Role.isAdmin?  <Col className='p-2'> <ModalForAddTeacher users = {this.props.users}
+                            addTeacherThunk = {this.props.addTeacherThunk} id = {this.props.id}/></Col> : null}
+                               
                         {this.props.teachers.map((value) => {
                          return <ListGroup variant="flush" key = {value.email} >
                             <ListGroup.Item>
@@ -45,6 +49,7 @@ class TeachersCourseData extends React.Component {
                             midtermResult = {value.midtermResult}
                             finalResult = {value.finalResult}
                            editStudentStatusThunk = {this.props.editStudentStatusThunk}
+                           editStudentMarkThunk = {this.props.editStudentMarkThunk}
                          />
                         })
                          }

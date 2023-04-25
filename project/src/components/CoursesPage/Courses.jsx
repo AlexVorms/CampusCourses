@@ -23,7 +23,9 @@ class Courses extends React.Component {
                     semester = {value.semester}
                     maximumStudentsCount = {value.maximumStudentsCount}
                     remainingSlotsCount = {value.remainingSlotsCount}
-                    status = {value.status}/>
+                    status = {value.status}
+                    Role = {this.props.Role}
+                    deleteCourseThunk = {this.props.deleteCourseThunk}/>
                 })
                 }
                 </div>

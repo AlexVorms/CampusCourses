@@ -1,11 +1,12 @@
 import React from 'react';
 import { Card, ListGroup, Tab, Tabs, Row, Col } from "react-bootstrap";
+import ModalForEditStudentStatus from './ModalForEditStudentStatus';
+
 
 class StudentsList extends React.Component {
     constructor(props){
         super(props);
         this.TranslationStatus = this.TranslationStatus.bind(this);
-        this.midtermResult = this.midtermResult.bind(this);
         this.DeclinedStatus = this.DeclinedStatus.bind(this);
         this.AcceptedStatus = this.AcceptedStatus.bind(this);
     }
@@ -22,18 +23,6 @@ class StudentsList extends React.Component {
         }
     }
 
-    midtermResult(result){
-        
-        if ((result === null)|| (result === 'NotDefined')){
-            return  <span className="badge text-bg-secondary">Отметки нет</span>
-        }
-        else if (result === 'Passed') {
-            return  <span className="badge text-bg-success">Успешно пройдена</span>
-        }
-        else if (result === "Failed"){
-            return  <span className="badge text-bg-danger">Провалена</span>
-        }
-    }
 
     DeclinedStatus(){
         console.log('зашел')
@@ -55,11 +44,14 @@ class StudentsList extends React.Component {
                                         <div className = 'text-muted'>{this.props.email}</div>
                                     </Col>
                                     {this.props.status === 'Accepted' && (this.props.Role.isAdmin || this.props.Role.isTeacher)? <Col>
-                                    <div >Промежуточная аттестация - {this.midtermResult(this.props.midtermResult)}</div>
+                                    <ModalForEditStudentStatus Result = {this.props.midtermResult} markType = {'Midterm'}  name = {this.props.name}
+                                     studentId = {this.props.studentId} courseId = {this.props.courseId} editStudentMarkThunk = {this.props.editStudentMarkThunk}/>
+                                   
                                     </Col>
                                      : null}
                                       {this.props.status === 'Accepted' && (this.props.Role.isAdmin || this.props.Role.isTeacher)? <Col>
-                                    <div>Финальная аттестация - {this.midtermResult(this.props.finalResult)}</div>
+                                      <ModalForEditStudentStatus Result = {this.props.finalResult} markType = {'Final'} name = {this.props.name}
+                                      studentId = {this.props.studentId} courseId = {this.props.courseId} editStudentMarkThunk = {this.props.editStudentMarkThunk}/>
                                     </Col>
                                      : null}
                                      

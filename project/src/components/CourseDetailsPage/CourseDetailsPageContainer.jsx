@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {getCourseDetailsThunk, signUpCourseThink, editStatusCourseThunk, editStudentStatusThunk} from "../../reducers/courseDetailsReducer"
+import {getCourseDetailsThunk, signUpCourseThink, editStatusCourseThunk, editStudentStatusThunk, editStudentMarkThunk, editCourseThunk, addTeacherThunk, AddNotificationsThunk} from "../../reducers/courseDetailsReducer"
+import {getListAllUsersThunk} from "../../reducers/coursesReducer"
 import { useParams } from 'react-router-dom';
 import CourseDetails from './CourseDetails';
 import { Navigate } from 'react-router-dom';
@@ -14,6 +15,9 @@ export function withRouter(Children){
 class CourseDetailsPageContainer extends React.Component {
     componentDidMount(){
         this.props.getCourseDetailsThunk(this.props.match.params.id);
+        if (this.props.Role.isAdmin){
+            this.props.getListAllUsersThunk();
+        }
     }
     render(){
         return (<div>
@@ -39,9 +43,21 @@ let mapStateToProps = (state) =>{
         students:state.courseDetailsPage.students,
         teachers:state.courseDetailsPage.teachers,
         notifications:state.courseDetailsPage.notifications,
-        Role: state.auth.Role
+        Role: state.auth.Role,
+        MyEmail: state.auth.email,
+        users: state.coursesPage.users
     }
 }
 
 let WithUrlDataContainerComponent = withRouter(CourseDetailsPageContainer);
-export default connect(mapStateToProps, {getCourseDetailsThunk, signUpCourseThink, editStatusCourseThunk, editStudentStatusThunk})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, 
+    {
+    getCourseDetailsThunk, 
+    signUpCourseThink,
+    editStatusCourseThunk,
+    editStudentStatusThunk,
+    editStudentMarkThunk,
+    editCourseThunk,
+    getListAllUsersThunk,
+    addTeacherThunk,
+    AddNotificationsThunk})(WithUrlDataContainerComponent);

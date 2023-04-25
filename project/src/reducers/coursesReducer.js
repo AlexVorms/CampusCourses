@@ -3,7 +3,7 @@ import { API } from "../Api/API";
 const SET_COURSES = 'SET_COURSES';
 const COURSES_IS_FETCHING = 'COURSES_IS_FETCHING';
 const SET_USERS = 'SET_USERS';
-
+const DELETE_COURSE = 'DELETE_COURSE';
 let initialState = {
   courses:[
   ],
@@ -25,6 +25,10 @@ const coursesReducer = (state = initialState, action) =>{
           ...state, users: action.users
       }
       }
+      case DELETE_COURSE:{
+        debugger
+        return state.courses.map(courses => courses.id !== action.id)
+      }
       default: 
           return state;
   }
@@ -33,6 +37,8 @@ const coursesReducer = (state = initialState, action) =>{
 export const setCoursesAC = (courses) => ({type:SET_COURSES, courses})
 export const setIsFetchingAC = (isFetching)=>({type:COURSES_IS_FETCHING, isFetching})
 export const setUsersAC = (users) => ({type:SET_USERS, users})
+export const deleteCourseAC = (id) => ({type:DELETE_COURSE, id})
+
 
 export function getCoursesThunk(id){
   return (dispatch) =>{
@@ -58,6 +64,16 @@ export function getListAllUsersThunk(){
   return(dispatch) => {
     API.getListAllUsers().then(data => {
       dispatch(setUsersAC(data));
+    })
+  }
+}
+
+export function deleteCourseThunk(id){
+  return(dispatch) => {
+   // dispatch(deleteCourseAC(id));
+    API.deleteCourse(id).then(data => {
+      console.log(data);
+     // dispatch(deleteCourseAC(id));
     })
   }
 }
