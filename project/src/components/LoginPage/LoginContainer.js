@@ -9,8 +9,8 @@ class LoginContainer extends React.Component {
         super(props);
         this.handleOnClick = this.handleOnClick.bind(this);
     }
-    handleOnClick(email, password) {
-        this.props.authorisationThunk(email, password);
+    async handleOnClick(email, password) {
+       await this.props.authorisationThunk(email, password);
     }
     render() {
         return (<div>

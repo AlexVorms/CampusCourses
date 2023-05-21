@@ -13,15 +13,31 @@ export function withRouter(Children){
  } 
 
 class CourseDetailsPageContainer extends React.Component {
-    componentDidMount(){
-        this.props.getCourseDetailsThunk(this.props.match.params.id);
+    constructor(props){
+        super(props);
+        this.state = {
+          IsTeacherCourse : false
+        };
+        this.handleClose = this.handleClose.bind(this);
+    }
+     async handleClose(flag){
+        this.setState({IsTeacherCourse : flag});
+    }
+    async componentDidMount(){
+        await this.props.getCourseDetailsThunk(this.props.match.params.id);
         if (this.props.Role.isAdmin){
-            this.props.getListAllUsersThunk();
+            await this.props.getListAllUsersThunk();
         }
+        await this.handleClose(false);
+        await this.props.teachers.map((t) => {
+            if(this.props.MyEmail == t.email){
+                this.handleClose(true)  
+            }
+        })
     }
     render(){
         return (<div>
-            {this.props.isAuth? <CourseDetails {...this.props}/> : <Navigate to = '/login'/>}
+            {this.props.isAuth? <CourseDetails {...this.props} IsTeacherCourse = {this.state.IsTeacherCourse}/> : <Navigate to = '/login'/>}
             </div>) 
     }
 }

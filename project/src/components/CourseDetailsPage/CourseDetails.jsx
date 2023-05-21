@@ -20,7 +20,7 @@ class CourseDetails extends React.Component {
                         <h4>Основная информация</h4>
                         </Col>
                         <Col>
-                        { this.props.Role.isAdmin? <div className = 'col d-grid gap-2 d-md-flex justify-content-md-end'>
+                        { (this.props.Role.isAdmin || this.props.IsTeacherCourse)? <div className = 'col d-grid gap-2 d-md-flex justify-content-md-end'>
                                  <ModalForEditCourse editCourseThunk = {this.props.editCourseThunk}  id = {this.props.id}/>
                             </div> : null}
                            
@@ -36,13 +36,15 @@ class CourseDetails extends React.Component {
                     signUpCourseThink = {this.props.signUpCourseThink}
                     id = {this.props.id}
                     Role = {this.props.Role}
-                    editStatusCourseThunk = {this.props.editStatusCourseThunk}/>
+                    editStatusCourseThunk = {this.props.editStatusCourseThunk}
+                    IsTeacherCourse = {this.props.IsTeacherCourse}/>
                     <RequirementsCourse id = {this.props.id} 
                     requirements = {this.props.requirements}
                     annotations = {this.props.annotations}
                     notifications = {this.props.notifications}
                     Role = {this.props.Role}
-                    AddNotificationsThunk = {this.props.AddNotificationsThunk}/>
+                    AddNotificationsThunk = {this.props.AddNotificationsThunk}
+                    IsTeacherCourse = {this.props.IsTeacherCourse}/>
                     <TeachersCourseData students = {this.props.students}
                     teachers = {this.props.teachers}
                     Role = {this.props.Role}
@@ -50,7 +52,8 @@ class CourseDetails extends React.Component {
                     editStudentStatusThunk = {this.props.editStudentStatusThunk}
                     editStudentMarkThunk = {this.props.editStudentMarkThunk}
                     users = {this.props.users}
-                    addTeacherThunk = {this.props.addTeacherThunk}/>
+                    addTeacherThunk = {this.props.addTeacherThunk}
+                    IsTeacherCourse = {this.props.IsTeacherCourse}/>
                 </Container>
 
             </div>

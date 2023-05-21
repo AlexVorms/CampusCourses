@@ -108,16 +108,23 @@ export function authorisationThunk(email, password){
                 alert('Неверное имя пользователя или пароль')
                 dispatch(setIsFetchingAC(false));
             }
-        }
-     )
-    }
+        })
+     .catch(error => {
+        alert('Что-то пошло не так');
+    })
+}
 }
 
 export function logoutThunk(){
-    return(dispatch)=> {
+     return (dispatch) => {
         API.logout().then(data =>{
+            if(data !== undefined && data.status === 200){
             dispatch(setIsAuthorisationAC('', false));
             dispatch(deleteUserData)
+            }
+            else{
+
+            }
         })
     }
 }

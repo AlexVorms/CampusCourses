@@ -25,12 +25,12 @@ class HeaderForTeacherAndStudent extends React.Component {
                 </Navbar.Brand>
             </Nav>
 
-        <div className="col-md-auto justify-content-end">
+        <div className="col justify-content-end">
             <Navbar.Brand>
             <NavLink to="/profile" style={{ textDecoration: 'none',color: 'white' }}>{this.props.email}</NavLink>
             </Navbar.Brand>
             <Navbar.Brand>
-            <NavLink to="/" style={{ textDecoration: 'none',color: 'white'  }}>Выход</NavLink>
+            <NavLink to="/" style={{ textDecoration: 'none',color: 'white'  }} onClick={this.props.logout}>Выход</NavLink>
             </Navbar.Brand>
         </div>
     </Container> 

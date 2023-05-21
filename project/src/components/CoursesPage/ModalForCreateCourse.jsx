@@ -148,6 +148,7 @@ class ModalForCreateCourse extends React.Component{
             </Form.Group>
 
             <div>
+            <Form.Label>Требования</Form.Label>
             <Editor
               editorState={editorState}
               wrapperClassName="demo-wrapper"
@@ -157,6 +158,7 @@ class ModalForCreateCourse extends React.Component{
           </div>
 
           <div>
+          <Form.Label>Аннотации</Form.Label>
             <Editor
               editorState={editorState1}
               wrapperClassName="demo-wrapper"

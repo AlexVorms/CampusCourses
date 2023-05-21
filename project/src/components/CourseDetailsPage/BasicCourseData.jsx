@@ -60,7 +60,7 @@ class BasicCourseData extends React.Component {
                                     {this.props.status === 'OpenForAssigning'? 
                                     <button type="button" className="btn btn-secondary"  onClick={this.SignUp}>Записаться на курс</button>
                                     : null}
-                                    {this.props.Role.isAdmin? 
+                                    {(this.props.Role.isAdmin || this.props.IsTeacherCourse)? 
                                     <ModalForEditStatusCourse editStatusCourseThunk= {this.props.editStatusCourseThunk} id = {this.props.id}/>
                                      : null}
                                 </div>

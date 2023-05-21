@@ -16,8 +16,6 @@ class ModalForAddNotifications extends React.Component{
          this.handleSubmit = this.handleSubmit.bind(this);
 
          this.nameRef = React.createRef();
-       
-
     }
     
 
@@ -29,7 +27,7 @@ class ModalForAddNotifications extends React.Component{
     }
     handleSubmit() {
         console.log(this.props.id, this.nameRef.current.value, this.state.selectSemester)
-        this.props.AddNotificationsThunk(this.props.id, this.nameRef.current.value, this.state.selectSemester)
+       this.props.AddNotificationsThunk(this.props.id, this.nameRef.current.value, this.state.selectSemester)
       this.handleClose();
     }
 

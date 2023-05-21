@@ -43,13 +43,13 @@ class StudentsList extends React.Component {
                                         <div>{this.TranslationStatus(this.props.status)}</div>
                                         <div className = 'text-muted'>{this.props.email}</div>
                                     </Col>
-                                    {this.props.status === 'Accepted' && (this.props.Role.isAdmin || this.props.Role.isTeacher)? <Col>
+                                    {this.props.status === 'Accepted' && (this.props.Role.isAdmin || this.props.IsTeacherCourse)? <Col>
                                     <ModalForEditStudentStatus Result = {this.props.midtermResult} markType = {'Midterm'}  name = {this.props.name}
                                      studentId = {this.props.studentId} courseId = {this.props.courseId} editStudentMarkThunk = {this.props.editStudentMarkThunk}/>
                                    
                                     </Col>
                                      : null}
-                                      {this.props.status === 'Accepted' && (this.props.Role.isAdmin || this.props.Role.isTeacher)? <Col>
+                                      {this.props.status === 'Accepted' && (this.props.Role.isAdmin || this.props.IsTeacherCourse)? <Col>
                                       <ModalForEditStudentStatus Result = {this.props.finalResult} markType = {'Final'} name = {this.props.name}
                                       studentId = {this.props.studentId} courseId = {this.props.courseId} editStudentMarkThunk = {this.props.editStudentMarkThunk}/>
                                     </Col>
