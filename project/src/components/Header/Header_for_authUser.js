@@ -6,10 +6,10 @@ import { Container } from "react-bootstrap";
 
 let HeaderForAuthUser = (props) =>{
     return (
-        <div className='Havbar'>
+       
         <Navbar bg="dark" expand="md" variant="dark">
-        <Container>
-            
+       
+        <div className='container-fluid'>
             <Navbar.Brand >Кампусные курсы</Navbar.Brand>
            <Nav className="me-auto">
                <Navbar.Brand>
@@ -24,10 +24,9 @@ let HeaderForAuthUser = (props) =>{
            <NavLink to="/" style={{ textDecoration: 'none',color: 'white'  }} onClick={props.logout}>Выход</NavLink>
            </Navbar.Brand>
        </div>
-       
-   </Container> 
+       </div>
         </Navbar>
-    </div>
+  
 
     )
 }

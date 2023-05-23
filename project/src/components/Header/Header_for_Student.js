@@ -7,10 +7,13 @@ import { Container } from "react-bootstrap";
 class HeaderForStudent extends React.Component{
     render(){
     return (
-        <div className='Havbar'>
+        
                 <Navbar bg="dark" expand="md" variant="dark">
-                <Container>
-                 <Navbar.Brand >Кампусные курсы</Navbar.Brand>
+           
+           <div className='container-fluid'>
+             <Navbar.Brand >Кампусные курсы</Navbar.Brand>
+             <Navbar.Toggle aria-controls="basic-navbar-nav" />
+             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <Navbar.Brand>
                     <NavLink  to="/groups" style={{ textDecoration: 'none',color: 'white' }} >Группы курсов</NavLink>
@@ -28,9 +31,10 @@ class HeaderForStudent extends React.Component{
                 <NavLink to="/" style={{ textDecoration: 'none',color: 'white'  }} onClick={this.props.logout}>Выход</NavLink>
                 </Navbar.Brand>
             </div>
-        </Container> 
+            </Navbar.Collapse>
+        </div>
                 </Navbar>
-            </div>
+          
     )
     }
 }

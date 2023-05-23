@@ -2,79 +2,220 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Container, Row, Col} from 'react-bootstrap';
+import { Controller, useForm } from 'react-hook-form';
 
-class Registration extends React.Component {
-    constructor(props) {
-      super(props);
-     
-      this.emailRef = React.createRef();
-      this.passwordRef = React.createRef();
-      this.fullNameRef = React.createRef();
-      this.birthDateRef = React.createRef();
-      this.passwordControlRef = React.createRef();
-      this.onChange = this.onChange.bind(this);
-    }
-    
-    onChange() {
-        let password = this.passwordRef.current.value,
-        passwordControl = this.passwordControlRef.current.value,
-        email = this.emailRef.current.value,
-        birthDate = this.birthDateRef.current.value,
-        fullName = this.fullNameRef.current.value;
-        if(password === passwordControl){
-            let data = {
-                fullName: fullName,
-                birthDate: birthDate,
-                email: email,
-                password: password,
-                confirmPassword: passwordControl
+function Registration(props){
+        const {control,
+            handleSubmit,
+            formState:{errors},
+            getValues 
+            } = useForm({
+            defaultValues:{
+                fullName: '',
+                birthDate: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
             }
-            console.log(data);
-           
-            this.props.handleOnClick(data)
-        }
-        else{
-           alert('Пароли не совпадают')
-        }
-    }
+        });
 
-    render() {
+        const formSubmit = (data) => {
+            console.log(data)
+           props.handleOnClick(data)
+        };
+        const confirmPassword = (value) => {
+            return value === getValues('password')
+        };
         return (
-            <Container>
-                <Row>
+            <Container className="mt-3">
+                <Row className="mb-3"> 
                     <Col>
                         <h1>Регистрация нового пользователя</h1>
-                    <Form>
-                    <Form.Label>ФИО</Form.Label>
-                        <Form.Control type="name" ref={this.fullNameRef}/>
+                        <Form noValidate >
+                            <Form.Group as={Col} md="12" controlId="validationCustom01">
+                                <Form.Label>ФИО</Form.Label>
+                                    <Controller
+                                    name = 'fullName'
+                                    control={control}
+                                    rules = {{
+                                        required: true,
+                                        minLength: 1
+                                    }}
+                                    render = {({field}) => (
+                                    <Form.Control 
+                                        isInvalid={errors.fullName}
+                                        type="text"
+                                        {...field}
+                                        placeholder="First name"
+                                    />
+                                    )}
+                                    />
+                                    {errors.fullName?.type === 'minLength' && (
+                                        <Form.Control.Feedback type="invalid">
+                                        Минимальная длина 1
+                                    </Form.Control.Feedback>
+                                    )}
+                                    {errors.fullName?.type === 'required' && (
+                                        <Form.Control.Feedback type="invalid">
+                                        Это обязательное поле ввода
+                                    </Form.Control.Feedback>
+                                    )}
+                            </Form.Group>
 
-                    <Form.Label>День Рождения</Form.Label>
-                    <Form.Control type="date" ref={this.birthDateRef}/>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email"  ref={this.emailRef} />
-                        <Form.Text className="text-muted">
-                        Email будет использоваться для входа в систему
-                        </Form.Text>
-                    </Form.Group>
+                            <Form.Group as={Col} md="12" controlId="validationCustom06">
+                                <Form.Label>Дата рождения</Form.Label>
+                                    <Controller
+                                    name = 'birthDate'
+                                    control={control}
+                                    rules = {{
+                                        required: true,
+                                    }}
+                                    render = {({field}) => (
+                                    <Form.Control 
+                                        isInvalid={errors.birthDate}
+                                        type="date"
+                                        {...field}
+                                        placeholder="birthDate"
+                                    />
+                                    )}
+                                    />
+                                    {errors.birthDate?.type === 'required' && (
+                                        <Form.Control.Feedback type="invalid">
+                                        Это обязательное поле ввода
+                                    </Form.Control.Feedback>
+                                    )}
+                            </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Пароль</Form.Label>
-                        <Form.Control type="password" ref={this.passwordRef} />
-                        <Form.Label>Повторите пароль</Form.Label>
-                        <Form.Control type="password" ref={this.passwordControlRef}/>
-                    </Form.Group>
-                    
-                    <Button variant="primary" type="button" onClick={this.onChange}>
-                        Зарегистрироваться
-                    </Button>
-                    </Form>
+                            <Form.Group as={Col} md="12" controlId="validationCustom02">
+                            <Form.Label>Email</Form.Label>
+                            <Controller
+                            name = 'email'
+                            control={control}
+                            rules = {{
+                                required:true,
+                                pattern:{
+                                    value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
+                                } 
+                            }}
+                            render = {({field}) => (
+                            <Form.Control 
+                                isInvalid={errors.email}
+                                type="text"
+                                {...field}
+                                placeholder="Email"
+                            />
+                            )}
+                            />
+                            {errors.email?.type === 'pattern' && (
+                                <Form.Control.Feedback type="invalid">
+                                Некорректный email
+                               </Form.Control.Feedback>
+                            )}
+                            {errors.email?.type === 'required' && (
+                                <Form.Control.Feedback type="invalid">
+                                Это обязательное поле ввода
+                               </Form.Control.Feedback>
+                            )}
+                            </Form.Group>
+
+
+
+                            <Form.Group as={Col} md="12" controlId="validationCustom03">
+                                <Form.Label>Пароль</Form.Label>
+                                    <Controller
+                                    name = 'password'
+                                    control={control}
+                                    rules = {{
+                                        required: true,
+                                        minLength: 6,
+                                        maxLength: 32,
+                                        pattern:{
+                                            value:/^(?=.*?[0-9])/i
+                                        }
+                                    }}
+                                    render = {({field}) => (
+                                    <Form.Control 
+                                        isInvalid={errors.password}
+                                        type="text"
+                                        {...field}
+                                        placeholder="password"
+                                    />
+                                    )}
+                                    />
+                                    {errors.password?.type === 'minLength' && (
+                                        <Form.Control.Feedback type="invalid">
+                                        Минимальная длина 6
+                                    </Form.Control.Feedback>
+                                    )}
+                                    {errors.password?.type === 'maxLength' && (
+                                        <Form.Control.Feedback type="invalid">
+                                       Максимальная длина 32
+                                    </Form.Control.Feedback>
+                                    )}
+                                    {errors.password?.type === 'required' && (
+                                        <Form.Control.Feedback type="invalid">
+                                        Это обязательное поле ввода
+                                    </Form.Control.Feedback>
+                                    )}
+                                    {errors.password?.type === 'pattern' && (
+                                        <Form.Control.Feedback type="invalid">
+                                        В пароле должна быть хотя бы одна цифра
+                                    </Form.Control.Feedback>
+                                    )}
+                            </Form.Group>
+
+
+
+                            <Form.Group as={Col} md="12" controlId="validationCustom04">
+                                <Form.Label>Повторите пароль</Form.Label>
+                                    <Controller
+                                    name = 'confirmPassword'
+                                    control={control}
+                                    rules = {{
+                                        validate: confirmPassword,
+                                        required: true,
+                                        minLength: 6,
+                                        maxLength: 32
+                                    }}
+                                    render = {({field}) => (
+                                    <Form.Control 
+                                        isInvalid={errors.confirmPassword}
+                                        type="text"
+                                        {...field}
+                                        placeholder="confirmPassword"
+                                    />
+                                    )}
+                                    />
+                                    {errors.confirmPassword?.type === 'minLength' && (
+                                        <Form.Control.Feedback type="invalid">
+                                        Минимальная длина 6
+                                    </Form.Control.Feedback>
+                                    )}
+                                    {errors.confirmPassword?.type === 'required' && (
+                                        <Form.Control.Feedback type="invalid">
+                                        Это обязательное поле ввода
+                                    </Form.Control.Feedback>
+                                    )}
+                                    {errors.confirmPassword?.type === 'maxLength' && (
+                                        <Form.Control.Feedback type="invalid">
+                                       Максимальная длина 32
+                                    </Form.Control.Feedback>
+                                    )}
+                                    {errors.confirmPassword?.type === 'validate' && (
+                                        <Form.Control.Feedback type="invalid">
+                                        Пароли должны совпадать
+                                    </Form.Control.Feedback>
+                                    )}
+                            </Form.Group>
+                           
+                            <Button className="mt-3" type="button" onClick = {handleSubmit(formSubmit)}>Зарегистрироваться</Button>
+                            
+                         </Form>
                     </Col>
                 </Row>
             </Container>
         );
-    }
 }
 
 export default Registration;

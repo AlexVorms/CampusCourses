@@ -43,6 +43,22 @@ password
 : 
 "sergey1"
 
+birthDate
+: 
+"2023-05-02"
+confirmPassword
+: 
+"password1"
+email
+: 
+"rosmary@mail.ru"
+fullName
+: 
+"Розмари"
+password
+: 
+"password1"
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
