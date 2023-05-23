@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, ListGroup, Tab, Tabs, Row, Col } from "react-bootstrap";
+import {ListGroup,Row, Col } from "react-bootstrap";
 import ModalForEditStudentStatus from './ModalForEditStudentStatus';
 
 
@@ -25,15 +25,14 @@ class StudentsList extends React.Component {
 
 
     DeclinedStatus(){
-        console.log('зашел')
         this.props.editStudentStatusThunk(this.props.courseId,this.props.studentId, "Declined" )
     }
 
     AcceptedStatus(){
-        console.log('зашел в принятие')
         this.props.editStudentStatusThunk(this.props.courseId,this.props.studentId, 'Accepted' )
     }
     render(){
+    
         return (
                 <ListGroup variant="flush"  key = {this.props.studentId}>
                             <ListGroup.Item>
@@ -43,7 +42,7 @@ class StudentsList extends React.Component {
                                         <div>{this.TranslationStatus(this.props.status)}</div>
                                         <div className = 'text-muted'>{this.props.email}</div>
                                     </Col>
-                                    {this.props.status === 'Accepted' && (this.props.Role.isAdmin || this.props.IsTeacherCourse)? <Col>
+                                    {this.props.status === 'Accepted' && ( this.props.IsTeacherCourse || this.props.Role.isAdmin)? <Col>
                                     <ModalForEditStudentStatus Result = {this.props.midtermResult} markType = {'Midterm'}  name = {this.props.name}
                                      studentId = {this.props.studentId} courseId = {this.props.courseId} editStudentMarkThunk = {this.props.editStudentMarkThunk}/>
                                    

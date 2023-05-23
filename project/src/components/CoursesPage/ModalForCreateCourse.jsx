@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -66,8 +66,6 @@ class ModalForCreateCourse extends React.Component{
         annotations : annotations1,
         mainTeacherId: mainTeacherId1
       }
-      console.log(this.props.groupId)
-      console.log(data)
       this.props.addCourseThunk(this.props.groupId, data)
       this.handleClose();
     }

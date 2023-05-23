@@ -32,7 +32,6 @@ class ModalForAddTeacher extends React.Component{
     }
     handleSubmit() {
       let mainTeacherId1 = this.state.selectValue;
-      console.log(this.props.id ,mainTeacherId1);
       this.props.addTeacherThunk(this.props.id, mainTeacherId1)
       this.handleClose();
     }

@@ -5,9 +5,6 @@ import { deleteGroupThunk, getGroupsThunk, addGroupThunk, editGroupThunk } from 
 import { Navigate } from "react-router-dom"
 
 class GroupContainer extends React.Component {
-    constructor(props){
-        super(props);
-    }
     componentDidMount(){
         this.props.getGroupsThunk();
       }

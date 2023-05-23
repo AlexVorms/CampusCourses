@@ -10,10 +10,10 @@ class CoursesItem extends React.Component {
       this.DeleteCourse = this.DeleteCourse.bind(this);
     }
     FoundSemester(){
-        if (this.props.semester == 'Autumn'){
+        if (this.props.semester === 'Autumn'){
             return 'Осенний'
         }
-        else if(this.props.semester == 'Spring'){
+        else if(this.props.semester === 'Spring'){
             return 'Весенний'
         }
         else if(this.props.semester === 'Summer'){

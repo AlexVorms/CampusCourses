@@ -4,10 +4,6 @@ import Preloader from '../common/Preloader';
 import ModalForCreateCourse from './ModalForCreateCourse';
 
 class Courses extends React.Component {
-    constructor(props) {
-        super(props);
-      }
-      
     render() {
       return <>
        {this.props.isFetching ? <Preloader/> : 

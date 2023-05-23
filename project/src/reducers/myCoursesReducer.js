@@ -26,13 +26,18 @@ const MyCoursesReducer = (state = initialState, action) =>{
 export const setCoursesAC = (MyCourses) => ({type:SET_MY_COURSES, MyCourses})
 export const setIsFetchingAC = (isFetching)=>({type:MY_COURSE_IS_FETCHING, isFetching})
 
-export  function getMyCoursesThunk(){
-  return (dispatch) =>{
-    dispatch(setIsFetchingAC(true));
-    API.getMyCourses().then(data =>{
-       dispatch(setCoursesAC(data));
-       dispatch(setIsFetchingAC(false))
-    })
+export function getMyCoursesThunk(){
+  return async dispatch => {
+    try{
+      await dispatch(setIsFetchingAC(true));
+      await API.getMyCourses().then(data =>{
+          dispatch(setCoursesAC(data));
+         dispatch(setIsFetchingAC(false))
+      })
+    }
+    catch(err){
+      alert('Что-то пошло не так')
+    }
   }
 }
 export default MyCoursesReducer;

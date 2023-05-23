@@ -5,20 +5,14 @@ import { getProfileThunk, editProfileThunk} from '../../reducers/authReducer';
 import { Navigate } from 'react-router-dom';
 
 class ProfileContainer extends React.Component {
-    constructor(props){
-        super(props);
-        this.handleOnClick = this.handleOnClick.bind(this);
-    }
     componentDidMount(){
         this.props.getProfileThunk();
     }
-    handleOnClick(fullName, birthDate) {
-        this.props.editProfileThunk(fullName, birthDate);
-    }
+   
     render(){
         return (
         <div>
-            {this.props.isAuth? <Profile {...this.props} handleOnClick = {this.handleOnClick}/> : <Navigate to = '/login'/>}
+            {this.props.isAuth? <Profile {...this.props}/> : <Navigate to = '/login'/>}
         </div>
         )
     }

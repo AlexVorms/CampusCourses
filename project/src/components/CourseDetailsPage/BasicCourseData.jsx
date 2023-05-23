@@ -1,13 +1,20 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
-import { ListGroup,Button } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 import ModalForEditStatusCourse from './ModalForEditStatusCourse';
 class BasicCourseData extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            flag: false
+          };
         this.FoundSemester = this.FoundSemester.bind(this);
         this.TranslationSemester = this.TranslationSemester.bind(this);
         this.SignUp = this.SignUp.bind(this);
+        this.changeflag = this.changeflag.bind(this);
+      }
+      changeflag(){
+        this.setState({flag: true});
       }
     FoundSemester(){
         if (this.props.semester === 'Autumn'){
@@ -40,6 +47,8 @@ class BasicCourseData extends React.Component {
     }
     SignUp(){
         this.props.signUpCourseThink(this.props.id)
+        this.changeflag()
+        this.props.getUserStatusThunk();
         alert('Вы записались на курс')
     }
     render(){
@@ -57,7 +66,7 @@ class BasicCourseData extends React.Component {
 
                                 <Col>
                                 <div className = 'col d-grid gap-2 d-md-flex justify-content-md-end'>
-                                    {this.props.status === 'OpenForAssigning'? 
+                                    {(this.props.status === 'OpenForAssigning' && !this.props.IsStudentCourse && !this.state.flag)? 
                                     <button type="button" className="btn btn-secondary"  onClick={this.SignUp}>Записаться на курс</button>
                                     : null}
                                     {(this.props.Role.isAdmin || this.props.IsTeacherCourse)? 

@@ -6,9 +6,7 @@ import { Navigate } from "react-router-dom";
 import { getMyCoursesThunk } from "../../reducers/myCoursesReducer"
 
  class MyCoursesContainer extends React.Component {
-    constructor(props){
-        super(props);
-    }
+
    async componentDidMount(){
            await this.props.getMyCoursesThunk();
       }

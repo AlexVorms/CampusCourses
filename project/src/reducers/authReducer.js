@@ -1,5 +1,4 @@
 import { API } from "../Api/API";
-
 const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const USER_IS_AUTH = 'USER_IS_AUTH';
@@ -21,6 +20,8 @@ let initialState = {
 };
 
 const authReducer = (state = initialState, action) =>{
+    let authState = {...state};
+  
     switch(action.type){
         case TOGGLE_IS_FETCHING:{
             return {...state, isFetching: action.isFetching}
@@ -36,8 +37,10 @@ const authReducer = (state = initialState, action) =>{
             return{...state, isAuth: action.data.isAuth, email: action.data.email}
         }
         case PROFILE_EDIT:{
-            return{...state, birthDate: action.data.birthDate,
-                fullName: action.data.fullName}
+            authState.birthDate = action.data.birthDate
+            authState.fullName = action.data.fullName
+          
+            return authState
         }
         case SET_USER_STATUS:{
            
@@ -77,10 +80,10 @@ export const deleteUserData =() =>({type:DELETE_DATA})
 
 export function getProfileThunk(){
     return(dispatch) =>{
-        dispatch(setIsFetchingAC(true));
+      
         API.getProfile().then(data =>{
             dispatch(setUserDataAC(data))
-            dispatch(setIsFetchingAC(false))
+           
           })
     }
 }
@@ -88,7 +91,6 @@ export function getUserStatusThunk(){
     return async(dispatch) =>{
         await API.getUserStatus().then(data =>{
             if(data !== undefined){
-                console.log(data);
                 dispatch(setUserStatus(data))
             }
         })
@@ -104,14 +106,10 @@ export function authorisationThunk(email, password){
              dispatch(setIsFetchingAC(false));
             }
             else{
-                console.log(response)
                 alert('Неверное имя пользователя или пароль')
                 dispatch(setIsFetchingAC(false));
             }
         })
-     .catch(error => {
-        alert('Что-то пошло не так');
-    })
 }
 }
 
@@ -123,7 +121,7 @@ export function logoutThunk(){
             dispatch(deleteUserData)
             }
             else{
-
+                
             }
         })
     }
@@ -132,7 +130,12 @@ export function logoutThunk(){
 export function registrationThunk(data){
     return(dispatch) => {
         API.Registration(data).then(response=>{
-            console.log("OK");
+            if(response.status === 200){
+                alert('Вы успешно зарегистрировались')
+            }
+            else{
+                alert('Что-то пошло не так')
+            }
         })
     }
 }
@@ -140,8 +143,9 @@ export function registrationThunk(data){
 export function editProfileThunk(fullName, birthDate){
     return(dispatch) => {
         API.EditProfile(fullName, birthDate).then(response=>{
+            if(response.status === 200){
             dispatch(editProfileAC(fullName, birthDate))
-            console.log("OK");
+            }
         })
     }
 }

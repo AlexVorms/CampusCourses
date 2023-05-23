@@ -14,9 +14,6 @@ export function withRouter(Children){
  } 
 
  class CoursesContainer extends React.Component {
-    constructor(props){
-        super(props);
-    }
     componentDidMount(){
             this.props.getCoursesThunk(this.props.match.params.id);
             if (this.props.Role.isAdmin){

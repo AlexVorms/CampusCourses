@@ -2,7 +2,6 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import {FormLabel, Col} from 'react-bootstrap'
 
 class ModalForAddNotifications extends React.Component{
     constructor(props){
@@ -26,7 +25,6 @@ class ModalForAddNotifications extends React.Component{
         this.setState({show: true});
     }
     handleSubmit() {
-        console.log(this.props.id, this.nameRef.current.value, this.state.selectSemester)
        this.props.AddNotificationsThunk(this.props.id, this.nameRef.current.value, this.state.selectSemester)
       this.handleClose();
     }

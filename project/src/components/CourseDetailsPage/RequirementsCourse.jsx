@@ -10,8 +10,6 @@ class RequirementsCourse extends React.Component {
         this.notificationsCount = this.notificationsCount.bind(this);
     }
     notificationsCount(){
-       
-        console.log(this.props.notifications.length)
         return this.props.notifications.length
     }
     render(){

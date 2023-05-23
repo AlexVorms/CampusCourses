@@ -4,10 +4,6 @@ import Preloader from '../common/Preloader';
 import MyCoursesItem from './MyCoursesItem';
 
 class MyCourses extends React.Component {
-    constructor(props) {
-        super(props);
-      }
-      
     render() {
       return <>
        {this.props.isFetching? <Preloader/> : 

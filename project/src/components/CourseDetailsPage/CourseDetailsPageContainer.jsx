@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {getCourseDetailsThunk, signUpCourseThink, editStatusCourseThunk, editStudentStatusThunk, editStudentMarkThunk, editCourseThunk, addTeacherThunk, AddNotificationsThunk} from "../../reducers/courseDetailsReducer"
+import {getMyCoursesThunk} from '../../reducers/myCoursesReducer'
+import {getUserStatusThunk} from '../../reducers/authReducer'
 import {getListAllUsersThunk} from "../../reducers/coursesReducer"
 import { useParams } from 'react-router-dom';
 import CourseDetails from './CourseDetails';
@@ -16,28 +18,46 @@ class CourseDetailsPageContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          IsTeacherCourse : false
+          IsTeacherCourse : false,
+          IsStudentCourse : false
         };
-        this.handleClose = this.handleClose.bind(this);
+        this.changeTeacherstate = this.changeTeacherstate.bind(this);
+        this.changeStudentstate = this.changeStudentstate.bind(this);
     }
-     async handleClose(flag){
+     async changeTeacherstate(flag){
         this.setState({IsTeacherCourse : flag});
     }
+    async changeStudentstate(flag){
+         this.setState({IsStudentCourse : flag});
+    }
     async componentDidMount(){
+        
         await this.props.getCourseDetailsThunk(this.props.match.params.id);
-        if (this.props.Role.isAdmin){
+        await this.props.getMyCoursesThunk();
+       
+        await this.changeTeacherstate(false);
+        await this.changeStudentstate(false);
+      
+        for(var i = 0; i < this.props.teachers.length; i++ ){
+            if(this.props.MyEmail === this.props.teachers[i].email){
+                await this.changeTeacherstate(true)  
+            }
+        }
+        for(var j = 0; j < this.props.MyCourses.length; j++ ){
+            if(this.props.id === this.props.MyCourses[j].id){
+                await this.changeStudentstate(true)  
+            }
+        }
+
+        if(this.props.Role.isAdmin || this.state.IsTeacherCourse){
             await this.props.getListAllUsersThunk();
         }
-        await this.handleClose(false);
-        await this.props.teachers.map((t) => {
-            if(this.props.MyEmail == t.email){
-                this.handleClose(true)  
-            }
-        })
+        
     }
     render(){
         return (<div>
-            {this.props.isAuth? <CourseDetails {...this.props} IsTeacherCourse = {this.state.IsTeacherCourse}/> : <Navigate to = '/login'/>}
+            {this.props.isAuth? <CourseDetails {...this.props} IsTeacherCourse = {this.state.IsTeacherCourse}
+            IsStudentCourse = {this.state.IsStudentCourse}/> : <Navigate to = '/login'/>}
             </div>) 
     }
 }
@@ -61,7 +81,8 @@ let mapStateToProps = (state) =>{
         notifications:state.courseDetailsPage.notifications,
         Role: state.auth.Role,
         MyEmail: state.auth.email,
-        users: state.coursesPage.users
+        users: state.coursesPage.users,
+        MyCourses: state.MyCoursesPage.MyCourses
     }
 }
 
@@ -76,4 +97,6 @@ export default connect(mapStateToProps,
     editCourseThunk,
     getListAllUsersThunk,
     addTeacherThunk,
-    AddNotificationsThunk})(WithUrlDataContainerComponent);
+    AddNotificationsThunk,
+    getMyCoursesThunk,
+    getUserStatusThunk})(WithUrlDataContainerComponent);

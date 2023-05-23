@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -21,7 +21,6 @@ class ModalForCreateGroup extends React.Component{
         this.setState({show: true});
     }
     handleSubmit() {
-      console.log('Отправленное имя: ' + this.nameRef.current.value);
       this.props.addGroupThunk(this.nameRef.current.value)
       this.handleClose();
     }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -26,8 +26,6 @@ class ModalForEditStatusCourse extends React.Component{
         this.setState({show: true});
     }
     handleSubmit() {
-     
-      console.log(this.state.selectSemester)
       this.props.editStatusCourseThunk(this.props.id,this.state.selectSemester)
       this.handleClose();
     }

@@ -8,6 +8,7 @@ import ModalForEditCourse from "./ModalForEditCourse";
 
 
 class CourseDetails extends React.Component {
+   
     render(){
         return <> 
         {this.props.isFetching ? <Preloader/> : (
@@ -37,7 +38,9 @@ class CourseDetails extends React.Component {
                     id = {this.props.id}
                     Role = {this.props.Role}
                     editStatusCourseThunk = {this.props.editStatusCourseThunk}
-                    IsTeacherCourse = {this.props.IsTeacherCourse}/>
+                    IsTeacherCourse = {this.props.IsTeacherCourse}
+                    IsStudentCourse = {this.props.IsStudentCourse}
+                    getUserStatusThunk = {this.props.getUserStatusThunk}/>
                     <RequirementsCourse id = {this.props.id} 
                     requirements = {this.props.requirements}
                     annotations = {this.props.annotations}

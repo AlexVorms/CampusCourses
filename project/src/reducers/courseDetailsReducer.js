@@ -6,6 +6,7 @@ const CHANGE_STUDENT_STATUS = 'CHANGE_STUDENT_STATUS';
 const CHANGE_STUDENT_MIDTERM_RESULT = 'CHANGE_STUDENT_MIDTERM_RESULT';
 const CHANGE_STUDENT_FINAL_RESULT = 'CHANGE_STUDENT_FINAL_RESULT';
 const EDIT_COURSE = 'EDIT_COURSE';
+const EDIT_COURSE_STATUS = 'EDIT_COURSE_STATUS';
 const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 
 let initialState = {
@@ -92,6 +93,10 @@ const courseDetailsReducer = (state = initialState, action) => {
             courseState.notifications.push(action.data)
             return courseState
         }
+        case EDIT_COURSE_STATUS:{
+            courseState.status = action.CourseStatus
+            return courseState
+        }
         default: 
             return courseState;
     }
@@ -105,30 +110,47 @@ export const editStudentFinalMarkAC = (id, finalResult) => ({type:CHANGE_STUDENT
 export const editStudentMidtermMarkAC = (id, midtermResult) => ({type: CHANGE_STUDENT_MIDTERM_RESULT, id, midtermResult})
 export const editCourseAC = (requirements, annotations) => ({type: EDIT_COURSE, data:{requirements, annotations}})
 export const AddNotificationAC = (text, isImportant) => ({type:ADD_NOTIFICATION, data:{text, isImportant}})
+export const editCourseStatusAC = (CourseStatus) => ({type:EDIT_COURSE_STATUS, CourseStatus})
 //THUNKS
 
 export function getCourseDetailsThunk(id){
-    return(dispatch)=>{
-        dispatch(setIsFetchingAC(true));
-        API.getCourseDetails(id).then(data =>{
-            dispatch(setCourseDetailsAC(data))
-            dispatch(setIsFetchingAC(false))
-        })
+    return async dispatch =>{
+        try{
+            dispatch(setIsFetchingAC(true));
+           await API.getCourseDetails(id).then(data =>{
+                dispatch(setCourseDetailsAC(data))
+                dispatch(setIsFetchingAC(false))
+            })
+        }
+        catch{
+
+        }
+       
     }
 }
 
 export function signUpCourseThink(id){
-    return(dispatch)=>{
-        API.SignUpCourse(id).then(data => {
-            console.log(data);
-        })
+    return async dispatch =>{
+        try{
+            await API.SignUpCourse(id).then(async data => {
+                await dispatch(getCourseDetailsThunk(id))
+            })
+        }
+       catch(err){
+
+       }
     }
 }
 
 export function editStatusCourseThunk(id, status){
     return(dispatch) => {
         API.editStatusCourse(id,status).then(data => {
-            console.log(data);
+            if(data.status === 200){
+                dispatch(editCourseStatusAC(status))
+            }
+            else{
+                alert('Что-то пошло не так')
+            }
         })
     }
 }
@@ -136,8 +158,9 @@ export function editStatusCourseThunk(id, status){
 export function editStudentStatusThunk(id, studentId, status){
     return(dispatch) => {
         API.editStudentStatus(id, studentId, status).then(data => {
-            console.log(data);
+            if(data.status === 200){
             dispatch(editStudentStatusAC(studentId, status))
+            }
         })
     }
 }
@@ -145,7 +168,7 @@ export function editStudentStatusThunk(id, studentId, status){
 export function editStudentMarkThunk(courseId, studentId, markType, mark ){
     return(dispatch)=>{
         API.editStudentMark(courseId, studentId, markType, mark).then(data => {
-            console.log(data);
+            
             if(markType === 'Midterm'){
                 dispatch(editStudentMidtermMarkAC(studentId,mark))
             }
@@ -159,8 +182,9 @@ export function editStudentMarkThunk(courseId, studentId, markType, mark ){
 export function editCourseThunk(id, requirements, annotations){
     return(dispatch)=>{
         API.editCourse(id, requirements, annotations).then(data => {
-            console.log(data);
+            if(data.status === 200){
             dispatch(editCourseAC(requirements, annotations))
+            }
         })
     }
 }
@@ -168,8 +192,9 @@ export function editCourseThunk(id, requirements, annotations){
 export function addTeacherThunk(id, userId){
     return(dispatch) => {
         API.AddTeacher(id, userId).then(data => {
-            console.log(data)
+            if(data.status === 200){
             dispatch(getCourseDetailsThunk(id))
+            }
         })
     }
 }
@@ -177,8 +202,9 @@ export function addTeacherThunk(id, userId){
 export function AddNotificationsThunk(id, text, isImportant){
     return(dispatch) => {
         API.AddNotification(id, text, isImportant).then(data => {
-            console.log(data)
+            if(data.status === 200){
             dispatch(AddNotificationAC(text, isImportant))
+            }
         })
     }
 }

@@ -5,9 +5,6 @@ import { getMyTeachingCoursesThunk } from "../../reducers/myTeachingCoursesReduc
 import MyTeachingCourse from "./MyTeachingCourse";
 
  class MyTeachingCoursesContainer extends React.Component {
-    constructor(props){
-        super(props);
-    }
     componentDidMount(){
          this.props.getMyTeachingCoursesThunk();
       }

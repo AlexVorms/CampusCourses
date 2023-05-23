@@ -81,7 +81,6 @@ export const editGroupAC = (id, name) => ({type:EDIT_GROUP, id, name})
 export function addGroupThunk(name){
     return(dispatch) => {
         API.createGroup(name).then(data => {
-            console.log(data)
             if(data.status === 200){
                 dispatch(addGroupAC(data.data))
             }
@@ -97,7 +96,6 @@ export function deleteGroupThunk(id){
     return async (dispatch) => {
         await API.deleteGroup(id)
         .then( async data=>{
-            console.log(data);
             if(data.status === 200){
             await dispatch(deleteGroupAC(id))
             }
@@ -106,8 +104,8 @@ export function deleteGroupThunk(id){
 }
 
 export function editGroupThunk(name,id){
-    return(dispatch) => {
-        API.editGroup(name,id)
+    return async dispatch => {
+        await API.editGroup(name,id)
         .then(data => {
             if(data.status === 200){
                 dispatch(editGroupAC(id,name))

@@ -12,8 +12,7 @@ class Profile extends React.Component{
       this.onChange = this.onChange.bind(this);
   }
   onChange(){
-    console.log(this.fullNameRef.current.value,this.birthDateRef.current.value)
-    this.props.handleOnClick(this.fullNameRef.current.value,this.birthDateRef.current.value)
+    this.props.editProfileThunk(this.fullNameRef.current.value,this.birthDateRef.current.value)
   }
   render() {
     return <>
@@ -45,14 +44,14 @@ class Profile extends React.Component{
               День рождения
             </Form.Label>
             <Col sm={10}>
-            <Form.Control type="date" className="form-control" value={this.props.birthDate} ref={this.birthDateRef}/>
+            <Form.Control type="date" className="form-control" ref={this.birthDateRef}/>
             </Col>
           </Form.Group>
 
 
           <Form.Group as={Row} className="mb-3">
             <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit" onClick={this.onChange}>Изменить</Button>
+              <Button type="button" onClick={this.onChange}>Изменить</Button>
             </Col>
           </Form.Group>
         </Form>

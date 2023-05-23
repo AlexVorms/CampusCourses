@@ -1,13 +1,10 @@
 import React from "react";
 
-import { Card, ListGroup, Tab, Tabs, Row, Col, Button } from "react-bootstrap";
+import { Card, ListGroup, Tab, Tabs, Col} from "react-bootstrap";
 import StudentsList from "./StudentsList";
 import ModalForAddTeacher from "./ModalForAddTeacher";
 
 class TeachersCourseData extends React.Component {
-    constructor(props){
-        super(props);
-    }
     render(){
         let teacher_id = 0;
         let student_id = 0;
@@ -55,7 +52,7 @@ class TeachersCourseData extends React.Component {
                             finalResult = {value.finalResult}
                            editStudentStatusThunk = {this.props.editStudentStatusThunk}
                            editStudentMarkThunk = {this.props.editStudentMarkThunk}
-                           IsTeacherCourse = {this.props.isTeacherCourse}
+                           IsTeacherCourse = {this.props.IsTeacherCourse}
                          />
                         })
                          }

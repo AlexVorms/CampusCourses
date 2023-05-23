@@ -46,12 +46,6 @@ class ModalForEditCourse extends React.Component{
     handleSubmit() {
       let requirements1 = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
       annotations1 = draftToHtml(convertToRaw(this.state.editorState1.getCurrentContent()))
-
-      let data = {
-        requirements: requirements1,
-        annotations : annotations1
-      }
-      console.log(data)
       this.props.editCourseThunk(this.props.id, requirements1, annotations1)
       this.handleClose();
     }

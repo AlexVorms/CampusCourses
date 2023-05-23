@@ -20,7 +20,6 @@ function Registration(props){
         });
 
         const formSubmit = (data) => {
-            console.log(data)
            props.handleOnClick(data)
         };
         const confirmPassword = (value) => {
@@ -46,7 +45,7 @@ function Registration(props){
                                         isInvalid={errors.fullName}
                                         type="text"
                                         {...field}
-                                        placeholder="First name"
+                                        
                                     />
                                     )}
                                     />
@@ -76,7 +75,7 @@ function Registration(props){
                                         isInvalid={errors.birthDate}
                                         type="date"
                                         {...field}
-                                        placeholder="birthDate"
+                                       
                                     />
                                     )}
                                     />
@@ -103,7 +102,7 @@ function Registration(props){
                                 isInvalid={errors.email}
                                 type="text"
                                 {...field}
-                                placeholder="Email"
+                                
                             />
                             )}
                             />
@@ -139,7 +138,7 @@ function Registration(props){
                                         isInvalid={errors.password}
                                         type="text"
                                         {...field}
-                                        placeholder="password"
+                                      
                                     />
                                     )}
                                     />
@@ -183,7 +182,7 @@ function Registration(props){
                                         isInvalid={errors.confirmPassword}
                                         type="text"
                                         {...field}
-                                        placeholder="confirmPassword"
+                                       
                                     />
                                     )}
                                     />

@@ -5,19 +5,15 @@ import {Card} from 'react-bootstrap'
 class MyTeachingCoursesItem extends React.Component {
     constructor(props) {
       super(props);
-      this.handleClick = this.handleClick.bind(this);
       this.FoundSemester = this.FoundSemester.bind(this);
       this.TranslationSemester = this.TranslationSemester.bind(this);
     }
 
-    handleClick(){
-        console.log(this.props.id)
-      }
     FoundSemester(){
-        if (this.props.semester == 'Autumn'){
+        if (this.props.semester === 'Autumn'){
             return 'Осенний'
         }
-        else if(this.props.semester == 'Spring'){
+        else if(this.props.semester === 'Spring'){
             return 'Весенний'
         }
         else if(this.props.semester === 'Summer'){

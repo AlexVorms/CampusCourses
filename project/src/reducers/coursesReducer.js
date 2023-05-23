@@ -11,6 +11,8 @@ let initialState = {
   isFetching: false
 };
 const coursesReducer = (state = initialState, action) =>{
+  let courseState = {...state};
+  courseState.courses = [...state.courses];
   switch(action.type){
       case SET_COURSES:{
           return{
@@ -26,8 +28,15 @@ const coursesReducer = (state = initialState, action) =>{
       }
       }
       case DELETE_COURSE:{
-        debugger
-        return state.courses.map(courses => courses.id !== action.id)
+        let array = [];
+          courseState.courses.map((g) => {
+                if(g.id !== action.id ){
+                    array.push(g)
+                }
+            })
+            courseState.courses = array;
+            return courseState
+        
       }
       default: 
           return state;
@@ -44,18 +53,20 @@ export function getCoursesThunk(id){
   return (dispatch) =>{
     dispatch(setIsFetchingAC(true));
     API.getCourses(id).then(data =>{
-      dispatch(setCoursesAC(data));
-       dispatch(setIsFetchingAC(false))
+        dispatch(setCoursesAC(data));
+        dispatch(setIsFetchingAC(false))
+
     })
   }
 }
 
-//Можно оптимизировать. Вместо отправления еще одного запроса на сервер, создать AC, который будет добавлять курс в state.
+
 export function addCourseThunk(groupId,data){
   return(dispatch) => {
     API.createCourse(groupId,data).then(data => {
-      console.log(data);
+
       dispatch(getCoursesThunk(groupId));
+
     })
   }
 }
@@ -63,17 +74,19 @@ export function addCourseThunk(groupId,data){
 export function getListAllUsersThunk(){
   return(dispatch) => {
     API.getListAllUsers().then(data => {
+
       dispatch(setUsersAC(data));
+
     })
   }
 }
 
 export function deleteCourseThunk(id){
   return(dispatch) => {
-   // dispatch(deleteCourseAC(id));
     API.deleteCourse(id).then(data => {
-      console.log(data);
-     // dispatch(deleteCourseAC(id));
+
+     dispatch(deleteCourseAC(id));
+
     })
   }
 }

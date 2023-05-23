@@ -13,7 +13,6 @@ class Group extends React.Component {
       this.CreateGroup = this.CreateGroup.bind(this);
       }
       CreateGroup(){
-        console.log("Create Group")
           return <ModalForCreateGroup/>
       }
     render() {

@@ -12,29 +12,29 @@ async function getGroups(){
         return response.data;
       })
       .catch(error => {
-        console.log(error);
+     
     });
 }
 
-function getCourses(id){
+async function getCourses(id){
     let token1 = JSON.parse(localStorage.getItem('user'));
-    return instance.get("groups/" + id, {headers: { Authorization: `Bearer ${token1}` }})
+    return await instance.get("groups/" + id, {headers: { Authorization: `Bearer ${token1}` }})
     .then(response =>{
         return response.data;
       })
       .catch(error => {
-        console.log(error);
+   
     });
 }
 
-function getProfile(){
+async function getProfile(){
     let token1 = JSON.parse(localStorage.getItem('user'));
-    return instance.get("profile", {headers: { Authorization: `Bearer ${token1}` }})
+    return await instance.get("profile", {headers: { Authorization: `Bearer ${token1}` }})
     .then(response => {
         return response.data;
     })
     .catch(error => {
-        console.log(error);
+    
     });
 }
 
@@ -49,7 +49,6 @@ async function authorisation(email, password){
         return response.status
     })
     .catch(error => {
-        console.log(error.response.data.error);
         return error.response.data.error
     });
 }
@@ -60,8 +59,6 @@ async function logout(){
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    
-    console.log(token23)
     return await instance1.post("logout")
     .then(response => {
         localStorage.removeItem("user");
@@ -78,32 +75,32 @@ async function getUserStatus(){
         return response.data;
     })
     .catch(error => {
-        console.log(error.response.data.error)
+        
     });
 }
-function Registration(data){
+async function Registration(data){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.post('registration', data)
+    return await instance2.post('registration', data)
     .then(response => {
         return response;
     })
     .catch(error => {
-        console.log(error.response.data.error);
+       
     });
 }
 
-function EditProfile(fullName, birthDate){
+async function EditProfile(fullName, birthDate){
 
      let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.put('profile',{
+    return await instance2.put('profile',{
         fullName,
         birthDate
     })
@@ -111,110 +108,109 @@ function EditProfile(fullName, birthDate){
         return response;
     })
     .catch(error => {
-        console.log(error.response.data.error);
+        
     });
 }
 
 
 
-function getCourseDetails(id){
+async function getCourseDetails(id){
     let token1 = JSON.parse(localStorage.getItem('user'));
-    return instance.get('courses/' + id + '/details', {headers: { Authorization: `Bearer ${token1}` }})
+    return await instance.get('courses/' + id + '/details', {headers: { Authorization: `Bearer ${token1}` }})
     .then(response => {
-        console.log(response.data)
         return response.data;
     })
     .catch(error => {
-        console.log(error.response.data.error);
+      
     });
 }
 
-function getMyCourses(){
+async function getMyCourses(){
     let token1 = JSON.parse(localStorage.getItem('user'));
-    return instance.get('/courses/my', {headers: { Authorization: `Bearer ${token1}` }})
+    return await instance.get('/courses/my', {headers: { Authorization: `Bearer ${token1}` }})
     .then(response =>{
         return response.data;
       })
       .catch(error => {
-        console.log(error);
+        
     });
 
 }
 
-function getMyTeachingCourses(){
+async function getMyTeachingCourses(){
     let token1 = JSON.parse(localStorage.getItem('user'));
-    return instance.get('/courses/teaching', {headers: { Authorization: `Bearer ${token1}` }})
+    return await instance.get('/courses/teaching', {headers: { Authorization: `Bearer ${token1}` }})
     .then(response =>{
         return response.data;
       })
       .catch(error => {
-        console.log(error);
+        
     });
 
 }
 
 
-function SignUpCourse(id){
+async function SignUpCourse(id){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.post('/courses/' + id + '/sign-up')
+    return await instance2.post('/courses/' + id + '/sign-up')
     .then(response =>{
         return response.data;
       })
       .catch(error => {
-        console.log(error);
+        
     });
 }
 
-function deleteGroup(id){
+async function deleteGroup(id){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.delete('/groups/' + id)
+    return await instance2.delete('/groups/' + id)
     .then(response =>{
         return response;
       })
       .catch(error => {
-        console.log(error);
+       
     });
 }
 
-function createGroup(name){
+async function createGroup(name){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.post('/groups', {
+    return await instance2.post('/groups', {
         name
     })
     .then(response =>{
         return response;
       })
       .catch(error => {
-        console.log(error);
+       
     });
 }
 
-function editGroup(name, id){
+async function editGroup(name, id){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.put('/groups/' + id, {
+    return await instance2.put('/groups/' + id, {
         name
     })
     .then(response =>{
         return response;
       })
       .catch(error => {
-        console.log(error);
+       
     });
 }
 
@@ -226,55 +222,55 @@ async function getListAllUsers(){
         return response.data;
       })
       .catch(error => {
-        console.log(error);
+        
     });
 }
-function createCourse(groupId, data){
+async function createCourse(groupId, data){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.post('/courses/' + groupId, data)
+    return await instance2.post('/courses/' + groupId, data)
     .then(response =>{
         return response;
       })
       .catch(error => {
-        console.log(error);
+        
     });
 }
 
-function editStatusCourse(id,status){
+async function editStatusCourse(id,status){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.post('/courses/' + id + '/status', {
+    return await instance2.post('/courses/' + id + '/status', {
         status
     })
     .then(response =>{
         return response;
       })
       .catch(error => {
-        console.log(error);
+        
     });
 }
 
-function editStudentStatus(id, studentId, status){
+async function editStudentStatus(id, studentId, status){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.post('/courses/' + id + '/student-status/' + studentId, {
+    return await instance2.post('/courses/' + id + '/student-status/' + studentId, {
         status
     })
     .then(response =>{
         return response;
       })
       .catch(error => {
-        console.log(error);
+      
     });
 }
 
@@ -293,17 +289,17 @@ async function editStudentMark(id, studentId, markType, mark){
         return response;
       })
       .catch(error => {
-        console.log(error);
+       
     });
 }
 
-function editCourse(id, requirements, annotations){
+async function editCourse(id, requirements, annotations){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.put('/courses/' + id, {
+    return await instance2.put('/courses/' + id, {
         requirements,
         annotations
     })
@@ -311,50 +307,50 @@ function editCourse(id, requirements, annotations){
         return response;
       })
       .catch(error => {
-        console.log(error);
+       
     });
 }
 
-function deleteCourse(id){
+async function deleteCourse(id){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.delete('/courses/' + id)
+    return await instance2.delete('/courses/' + id)
     .then(response =>{
         return response;
       })
       .catch(error => {
-        console.log(error);
+        
     });
 }
 
-function AddTeacher(id, userId){
+async function AddTeacher(id, userId){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
    
-    return instance2.post('/courses/' + id + '/teachers',{
+    return await instance2.post('/courses/' + id + '/teachers',{
         userId
     })
     .then(response =>{
         return response;
       })
       .catch(error => {
-        console.log(error);
+       
     });
 }
 
-function AddNotification(id, text,isImportant){
+async function AddNotification(id, text,isImportant){
     let token23 = JSON.parse(localStorage.getItem('user'));
     let instance2 = axios.create({
         baseURL:"https://camp-courses.api.kreosoft.space/",
         headers: { Authorization: `Bearer ${token23}` }
     })
-    return instance2.post('/courses/' + id + '/notifications', {
+    return await instance2.post('/courses/' + id + '/notifications', {
         text,
         isImportant
     })
@@ -362,7 +358,7 @@ function AddNotification(id, text,isImportant){
         return response;
       })
       .catch(error => {
-        console.log(error);
+ 
     });
 }
 export const API = {
