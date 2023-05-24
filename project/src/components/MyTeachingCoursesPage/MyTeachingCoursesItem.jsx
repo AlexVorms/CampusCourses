@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card} from 'react-bootstrap'
+import { NavLink } from 'react-router-dom';
 
 
 class MyTeachingCoursesItem extends React.Component {
@@ -41,11 +42,13 @@ class MyTeachingCoursesItem extends React.Component {
     render() {
       return (
         <div className='p-3' type="button">
-                <Card onClick={this.handleClick}>
+                <Card>
+                <NavLink to = {'/courses/' + this.props.id} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Card.Header>
                         <h5>{this.props.name} </h5>
                         <div className='text-end'>{this.TranslationSemester()}</div>
                     </Card.Header>
+                </NavLink>
                      <Card.Body>
                         <div>
                         <div>Учебный год - {this.props.startYear}</div>
