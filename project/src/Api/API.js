@@ -158,7 +158,7 @@ async function SignUpCourse(id){
     })
     return await instance2.post('/courses/' + id + '/sign-up')
     .then(response =>{
-        return response.data;
+        return response;
       })
       .catch(error => {
         

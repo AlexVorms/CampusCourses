@@ -82,7 +82,8 @@ let mapStateToProps = (state) =>{
         Role: state.auth.Role,
         MyEmail: state.auth.email,
         users: state.coursesPage.users,
-        MyCourses: state.MyCoursesPage.MyCourses
+        MyCourses: state.MyCoursesPage.MyCourses,
+        isMain: state.courseDetailsPage.isMain
     }
 }
 

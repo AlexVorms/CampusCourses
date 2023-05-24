@@ -8,6 +8,8 @@ const CHANGE_STUDENT_FINAL_RESULT = 'CHANGE_STUDENT_FINAL_RESULT';
 const EDIT_COURSE = 'EDIT_COURSE';
 const EDIT_COURSE_STATUS = 'EDIT_COURSE_STATUS';
 const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
+const SIGN_UP = 'SIGN_UP';
+const ADD_TEACHER = 'ADD_TEACHER';
 
 let initialState = {
     id: null,
@@ -23,7 +25,8 @@ let initialState = {
     students:[],
     teachers:[],
     notifications:[],
-    isFetching: false
+    isFetching: false,
+    isMain: false
 };
 
 const courseDetailsReducer = (state = initialState, action) => {
@@ -97,6 +100,13 @@ const courseDetailsReducer = (state = initialState, action) => {
             courseState.status = action.CourseStatus
             return courseState
         }
+        case SIGN_UP:{
+            courseState.isMain = true
+            return courseState
+        }
+        case ADD_TEACHER:
+            courseState.teachers = action.data
+            return courseState
         default: 
             return courseState;
     }
@@ -111,6 +121,8 @@ export const editStudentMidtermMarkAC = (id, midtermResult) => ({type: CHANGE_ST
 export const editCourseAC = (requirements, annotations) => ({type: EDIT_COURSE, data:{requirements, annotations}})
 export const AddNotificationAC = (text, isImportant) => ({type:ADD_NOTIFICATION, data:{text, isImportant}})
 export const editCourseStatusAC = (CourseStatus) => ({type:EDIT_COURSE_STATUS, CourseStatus})
+export const signUpCourseAC = () => ({type:SIGN_UP})
+export const addTeacherAC = (data) => ({type:ADD_TEACHER, data})
 //THUNKS
 
 export function getCourseDetailsThunk(id){
@@ -133,7 +145,7 @@ export function signUpCourseThink(id){
     return async dispatch =>{
         try{
             await API.SignUpCourse(id).then(async data => {
-                await dispatch(getCourseDetailsThunk(id))
+                await dispatch(signUpCourseAC())
             })
         }
        catch(err){
@@ -193,7 +205,7 @@ export function addTeacherThunk(id, userId){
     return(dispatch) => {
         API.AddTeacher(id, userId).then(data => {
             if(data.status === 200){
-            dispatch(getCourseDetailsThunk(id))
+            dispatch(addTeacherAC(data.data.teachers))
             }
         })
     }

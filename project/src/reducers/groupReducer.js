@@ -7,13 +7,14 @@ const GROUPS_IS_FETCHING = 'GROUPS_IS_FETCHING';
 const ADD_GROUP = 'ADD_GROUP';
 const EDIT_GROUP = 'EDIT_GROUP';
 
+
 let initialState = {
     group: [],
     isFetching: false
 };
 
 const groupReducer = (state = initialState, action) =>{
-    let groupState = {...state};
+    let groupState = {...state}
     groupState.group = [...state.group];
     
     switch(action.type){

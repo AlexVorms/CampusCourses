@@ -40,6 +40,7 @@ class CourseDetails extends React.Component {
                     editStatusCourseThunk = {this.props.editStatusCourseThunk}
                     IsTeacherCourse = {this.props.IsTeacherCourse}
                     IsStudentCourse = {this.props.IsStudentCourse}
+                    isMain = {this.props.isMain}
                     getUserStatusThunk = {this.props.getUserStatusThunk}/>
                     <RequirementsCourse id = {this.props.id} 
                     requirements = {this.props.requirements}
