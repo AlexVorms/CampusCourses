@@ -75,7 +75,7 @@ export const setIsAuthorisationAC = ( email,isAuth) => ({type:USER_IS_AUTH, data
 export const setIsFetchingAC = (isFetching)=>({type:TOGGLE_IS_FETCHING, isFetching})
 export const editProfileAC = (fullName, birthDate) =>({type:PROFILE_EDIT, data:{fullName, birthDate}})
 export const setUserStatus = (data) =>({type:SET_USER_STATUS, data:data})
-export const deleteUserData =() =>({type:DELETE_DATA})
+export const deleteUserData = () =>({type:DELETE_DATA})
 // THUNKS
 
 export function getProfileThunk(){
