@@ -1,4 +1,4 @@
-import { API } from "../Api/API";
+import { CoursesApi } from "../Api/CoursesApi";
 
 const SET_MY_COURSES = 'SET__MY_COURSES';
 const MY_COURSE_IS_FETCHING = 'MY_COURSE_IS_FETCHING';
@@ -30,7 +30,7 @@ export function getMyCoursesThunk(){
   return async dispatch => {
     try{
       await dispatch(setIsFetchingAC(true));
-      await API.getMyCourses().then(data =>{
+      await CoursesApi.getMyCourses().then(data =>{
           dispatch(setCoursesAC(data));
          dispatch(setIsFetchingAC(false))
       })

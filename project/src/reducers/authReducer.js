@@ -1,4 +1,4 @@
-import { API } from "../Api/API";
+import { API } from "../Api/UserApi";
 const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const USER_IS_AUTH = 'USER_IS_AUTH';

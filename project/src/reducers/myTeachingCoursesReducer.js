@@ -1,4 +1,4 @@
-import { API } from "../Api/API";
+import { CoursesApi } from "../Api/CoursesApi";
 
 const SET_MY_TEACHING_COURSES = 'SET_MY_TEACHING_COURSES';
 const MY_TEACHING_COURSE_IS_FETCHING = 'MY_TEACHING_COURSE_IS_FETCHING';
@@ -29,7 +29,7 @@ export const setIsFetchingAC = (isFetching)=>({type:MY_TEACHING_COURSE_IS_FETCHI
 export  function getMyTeachingCoursesThunk(){
   return (dispatch) =>{
     dispatch(setIsFetchingAC(true));
-    API.getMyTeachingCourses().then(data =>{
+    CoursesApi.getMyTeachingCourses().then(data =>{
        dispatch(setCoursesAC(data));
        dispatch(setIsFetchingAC(false))
     })

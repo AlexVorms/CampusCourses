@@ -1,4 +1,4 @@
-import { API } from "../Api/API";
+import { CoursesApi } from "../Api/CoursesApi";
 
 const SET_COURSES = 'SET_COURSES';
 const COURSES_IS_FETCHING = 'COURSES_IS_FETCHING';
@@ -52,7 +52,7 @@ export const deleteCourseAC = (id) => ({type:DELETE_COURSE, id})
 export function getCoursesThunk(id){
   return (dispatch) =>{
     dispatch(setIsFetchingAC(true));
-    API.getCourses(id).then(data =>{
+    CoursesApi.getCourses(id).then(data =>{
         dispatch(setCoursesAC(data));
         dispatch(setIsFetchingAC(false))
 
@@ -63,7 +63,7 @@ export function getCoursesThunk(id){
 
 export function addCourseThunk(groupId,data){
   return(dispatch) => {
-    API.createCourse(groupId,data).then(data => {
+    CoursesApi.createCourse(groupId,data).then(data => {
 
       dispatch(getCoursesThunk(groupId));
 
@@ -73,7 +73,7 @@ export function addCourseThunk(groupId,data){
 
 export function getListAllUsersThunk(){
   return(dispatch) => {
-    API.getListAllUsers().then(data => {
+    CoursesApi.getListAllUsers().then(data => {
 
       dispatch(setUsersAC(data));
 
@@ -83,8 +83,7 @@ export function getListAllUsersThunk(){
 
 export function deleteCourseThunk(id){
   return(dispatch) => {
-    API.deleteCourse(id).then(data => {
-
+    CoursesApi.deleteCourse(id).then(data => {
      dispatch(deleteCourseAC(id));
 
     })

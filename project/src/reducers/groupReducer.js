@@ -1,5 +1,4 @@
-import { API } from "../Api/API";
-
+import { GroupApi } from "../Api/GroupApi";
 
 const DELETE_GROUP = 'DELETE_GROUP';
 const SET_GROUP = 'SET_GROUP';
@@ -72,7 +71,7 @@ export const editGroupAC = (id, name) => ({type:EDIT_GROUP, id, name})
  export function getGroupsThunk(){ 
     return async (dispatch) => {
     //dispatch(setIsFetchingAC(true));
-    await API.getGroups().then(data =>{
+    await GroupApi.getGroups().then(data =>{
           dispatch(setGroupAC(data))
           //dispatch(setIsFetchingAC(false))
         })
@@ -81,7 +80,7 @@ export const editGroupAC = (id, name) => ({type:EDIT_GROUP, id, name})
 
 export function addGroupThunk(name){
     return(dispatch) => {
-        API.createGroup(name).then(data => {
+        GroupApi.createGroup(name).then(data => {
             if(data.status === 200){
                 dispatch(addGroupAC(data.data))
             }
@@ -95,7 +94,7 @@ export function addGroupThunk(name){
 
 export function deleteGroupThunk(id){
     return async (dispatch) => {
-        await API.deleteGroup(id)
+        await GroupApi.deleteGroup(id)
         .then( async data=>{
             if(data.status === 200){
             await dispatch(deleteGroupAC(id))
@@ -106,7 +105,7 @@ export function deleteGroupThunk(id){
 
 export function editGroupThunk(name,id){
     return async dispatch => {
-        await API.editGroup(name,id)
+        await GroupApi.editGroup(name,id)
         .then(data => {
             if(data.status === 200){
                 dispatch(editGroupAC(id,name))

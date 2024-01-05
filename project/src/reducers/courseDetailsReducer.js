@@ -1,4 +1,4 @@
-import { API } from "../Api/API";
+import { CourseDetailsApi } from "../Api/CoursesDetailsApi";
 
 const SET_COURSE_DETAILS = 'SET_COURSE_DETAILS';
 const COURSE_IS_FETCHING = 'COURSE_IS_FETCHING';
@@ -129,7 +129,7 @@ export function getCourseDetailsThunk(id){
     return async dispatch =>{
         try{
             dispatch(setIsFetchingAC(true));
-           await API.getCourseDetails(id).then(data =>{
+           await CourseDetailsApi.getCourseDetails(id).then(data =>{
                 dispatch(setCourseDetailsAC(data))
                 dispatch(setIsFetchingAC(false))
             })
@@ -144,7 +144,7 @@ export function getCourseDetailsThunk(id){
 export function signUpCourseThink(id){
     return async dispatch =>{
         try{
-            await API.SignUpCourse(id).then(async data => {
+            await CourseDetailsApi.SignUpCourse(id).then(async data => {
                 await dispatch(signUpCourseAC())
             })
         }
@@ -156,7 +156,7 @@ export function signUpCourseThink(id){
 
 export function editStatusCourseThunk(id, status){
     return(dispatch) => {
-        API.editStatusCourse(id,status).then(data => {
+        CourseDetailsApi.editStatusCourse(id,status).then(data => {
             if(data.status === 200){
                 dispatch(editCourseStatusAC(status))
             }
@@ -169,7 +169,7 @@ export function editStatusCourseThunk(id, status){
 
 export function editStudentStatusThunk(id, studentId, status){
     return(dispatch) => {
-        API.editStudentStatus(id, studentId, status).then(data => {
+        CourseDetailsApi.editStudentStatus(id, studentId, status).then(data => {
             if(data.status === 200){
             dispatch(editStudentStatusAC(studentId, status))
             }
@@ -179,7 +179,7 @@ export function editStudentStatusThunk(id, studentId, status){
 
 export function editStudentMarkThunk(courseId, studentId, markType, mark ){
     return(dispatch)=>{
-        API.editStudentMark(courseId, studentId, markType, mark).then(data => {
+        CourseDetailsApi.editStudentMark(courseId, studentId, markType, mark).then(data => {
             
             if(markType === 'Midterm'){
                 dispatch(editStudentMidtermMarkAC(studentId,mark))
@@ -193,7 +193,7 @@ export function editStudentMarkThunk(courseId, studentId, markType, mark ){
 
 export function editCourseThunk(id, requirements, annotations){
     return(dispatch)=>{
-        API.editCourse(id, requirements, annotations).then(data => {
+        CourseDetailsApi.editCourse(id, requirements, annotations).then(data => {
             if(data.status === 200){
             dispatch(editCourseAC(requirements, annotations))
             }
@@ -203,7 +203,7 @@ export function editCourseThunk(id, requirements, annotations){
 
 export function addTeacherThunk(id, userId){
     return(dispatch) => {
-        API.AddTeacher(id, userId).then(data => {
+        CourseDetailsApi.AddTeacher(id, userId).then(data => {
             if(data.status === 200){
             dispatch(addTeacherAC(data.data.teachers))
             }
@@ -213,7 +213,7 @@ export function addTeacherThunk(id, userId){
 
 export function AddNotificationsThunk(id, text, isImportant){
     return(dispatch) => {
-        API.AddNotification(id, text, isImportant).then(data => {
+        CourseDetailsApi.AddNotification(id, text, isImportant).then(data => {
             if(data.status === 200){
             dispatch(AddNotificationAC(text, isImportant))
             }
