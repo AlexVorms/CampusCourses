@@ -2,7 +2,6 @@ import React from 'react';
 import Profile from './Profile';
 import { connect } from "react-redux";
 import { getProfileThunk, editProfileThunk} from '../../reducers/authReducer';
-import { Navigate } from 'react-router-dom';
 
 class ProfileContainer extends React.Component {
     componentDidMount(){
@@ -11,15 +10,12 @@ class ProfileContainer extends React.Component {
    
     render(){
         return (
-        <div>
-            {this.props.isAuth? <Profile {...this.props}/> : <Navigate to = '/login'/>}
-        </div>
+          <Profile {...this.props}/> 
         )
     }
 }
 let mapStateToProps = (state) =>{
     return {
-        isAuth:state.auth.isAuth,
         email: state.auth.email,
         fullName : state.auth.fullName,
         birthDate: state.auth.birthDate,

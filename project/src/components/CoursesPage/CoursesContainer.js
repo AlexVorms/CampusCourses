@@ -3,7 +3,6 @@ import { getCoursesThunk, getListAllUsersThunk, addCourseThunk, deleteCourseThun
 import Courses from "./Courses";
 import { useParams } from 'react-router-dom';
 import React from "react";
-import { Navigate } from "react-router-dom";
 
 
 export function withRouter(Children){
@@ -22,14 +21,11 @@ export function withRouter(Children){
       }
 
       render(){
-        return (<div>
-             {this.props.isAuth? <Courses {...this.props} groupId = {this.props.match.params.id}/> : <Navigate to = '/login'/>}
-             </div>)
+        return (<Courses {...this.props} groupId = {this.props.match.params.id}/>)
       }
  }
 let mapStateToProps = (state) =>{
     return {
-        isAuth: state.auth.isAuth,
         courses: state.coursesPage.courses,
         isFetching: state.coursesPage.isFetching,
         Role: state.auth.Role,

@@ -6,7 +6,7 @@ import {getUserStatusThunk} from '../../reducers/authReducer'
 import {getListAllUsersThunk} from "../../reducers/coursesReducer"
 import { useParams } from 'react-router-dom';
 import CourseDetails from './CourseDetails';
-import { Navigate } from 'react-router-dom';
+
 export function withRouter(Children){
     return(props)=>{
        const match  = {params: useParams()};
@@ -55,16 +55,13 @@ class CourseDetailsPageContainer extends React.Component {
         
     }
     render(){
-        return (<div>
-            {this.props.isAuth? <CourseDetails {...this.props} IsTeacherCourse = {this.state.IsTeacherCourse}
-            IsStudentCourse = {this.state.IsStudentCourse}/> : <Navigate to = '/login'/>}
-            </div>) 
+        return (<CourseDetails {...this.props} IsTeacherCourse = {this.state.IsTeacherCourse}
+            IsStudentCourse = {this.state.IsStudentCourse}/>) 
     }
 }
 
 let mapStateToProps = (state) =>{
     return {
-        isAuth: state.auth.isAuth,
         isFetching: state.courseDetailsPage.isFetching,
         id: state.courseDetailsPage.id,
         name: state.courseDetailsPage.name,

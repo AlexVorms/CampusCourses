@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 
 import MyCourses from "./MyCourses";
 import React from "react";
-import { Navigate } from "react-router-dom";
 import { getMyCoursesThunk } from "../../reducers/myCoursesReducer"
 
  class MyCoursesContainer extends React.Component {
@@ -12,14 +11,11 @@ import { getMyCoursesThunk } from "../../reducers/myCoursesReducer"
       }
 
       render(){
-        return (<div>
-             {this.props.isAuth? <MyCourses {...this.props}/> : <Navigate to = '/login'/>}
-             </div>)
+        return (<MyCourses {...this.props}/> )
       }
  }
 let mapStateToProps = (state) =>{
     return {
-        isAuth: state.auth.isAuth,
         MyCourses: state.MyCoursesPage.MyCourses,
         isFetching: state.MyCoursesPage.isFetching
     }
