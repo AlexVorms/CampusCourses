@@ -1,28 +1,12 @@
 import React from 'react';
 import {Card} from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
-
+import { FoundSemester } from '../common/TranslationFuncions';
 
 class MyTeachingCoursesItem extends React.Component {
     constructor(props) {
       super(props);
-      this.FoundSemester = this.FoundSemester.bind(this);
       this.TranslationSemester = this.TranslationSemester.bind(this);
-    }
-
-    FoundSemester(){
-        if (this.props.semester === 'Autumn'){
-            return 'Осенний'
-        }
-        else if(this.props.semester === 'Spring'){
-            return 'Весенний'
-        }
-        else if(this.props.semester === 'Summer'){
-          return 'Летний'
-      }
-      else if(this.props.semester === 'Winter'){
-          return 'Зимний'
-      }
     }
 
     TranslationSemester(){
@@ -52,7 +36,7 @@ class MyTeachingCoursesItem extends React.Component {
                      <Card.Body>
                         <div>
                         <div>Учебный год - {this.props.startYear}</div>
-                        <div>Семестр - {this.FoundSemester()}</div>
+                        <div>Семестр - {FoundSemester(this.props)}</div>
                         <div className="fw-light">Мест всего - {this.props.maximumStudentsCount}</div>
                         <div className="fw-light">Мест свободно - {this.props.remainingSlotsCount}</div>
                         </div>

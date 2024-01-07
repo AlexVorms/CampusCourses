@@ -2,27 +2,13 @@ import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 import ModalForEditStatusCourse from './ModalForEditStatusCourse';
+import { FoundSemester } from '../common/TranslationFuncions';
 class BasicCourseData extends React.Component {
     constructor(props) {
         super(props);
-        this.FoundSemester = this.FoundSemester.bind(this);
         this.TranslationSemester = this.TranslationSemester.bind(this);
         this.SignUp = this.SignUp.bind(this);
       }
-    FoundSemester(){
-        if (this.props.semester === 'Autumn'){
-            return 'Осенний'
-        }
-        else if(this.props.semester === 'Spring'){
-            return 'Весенний'
-        }
-        else if(this.props.semester === 'Summer'){
-            return 'Летний'
-        }
-        else if(this.props.semester === 'Winter'){
-            return 'Зимний'
-        }
-    }
 
     TranslationSemester(){
         if(this.props.status ==='Started'){
@@ -78,7 +64,7 @@ class BasicCourseData extends React.Component {
                                     </div>
                                     <div className = 'col-6'>
                                         <h5>Семестр</h5>
-                                        <div>{this.FoundSemester()}</div>
+                                        <div>{FoundSemester(this.props)}</div>
                                     </div>
                                 </div>
                     </ListGroup.Item>
