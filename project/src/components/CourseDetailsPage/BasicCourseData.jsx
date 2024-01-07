@@ -2,28 +2,13 @@ import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 import ModalForEditStatusCourse from './ModalForEditStatusCourse';
-import { FoundSemester } from '../common/TranslationFuncions';
+import { FoundSemester, TranslationSemester } from '../common/TranslationFuncions';
 class BasicCourseData extends React.Component {
     constructor(props) {
         super(props);
-        this.TranslationSemester = this.TranslationSemester.bind(this);
         this.SignUp = this.SignUp.bind(this);
       }
 
-    TranslationSemester(){
-        if(this.props.status ==='Started'){
-            return <div className = 'text-primary'>В процессе обучения</div>
-        }
-        else if(this.props.status === 'OpenForAssigning'){
-            return <div className = 'text-success'>Открыт для записи</div>
-        }
-        else if(this.props.status === 'Created'){
-            return <div className = 'text-secondary'>Создан</div>
-        }
-        else if(this.props.status === 'Finished'){
-            return <div className = 'text-danger'>Закрыт</div>
-        }
-    }
     SignUp(){
         this.props.signUpCourseThink(this.props.id)
         this.props.getUserStatusThunk();
@@ -39,7 +24,7 @@ class BasicCourseData extends React.Component {
                             <Row>
                                 <Col>
                                 <h5>Статус курса</h5>
-                                <div>{this.TranslationSemester()}</div>
+                                <div>{TranslationSemester(this.props)}</div>
                                 </Col>
 
                                 <Col>

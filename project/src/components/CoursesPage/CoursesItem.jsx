@@ -1,27 +1,11 @@
 import React from 'react';
 import {Card} from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
-import { FoundSemester } from '../common/TranslationFuncions';
+import { FoundSemester, TranslationSemester } from '../common/TranslationFuncions';
 class CoursesItem extends React.Component {
     constructor(props) {
       super(props);
-      this.TranslationSemester = this.TranslationSemester.bind(this);
       this.DeleteCourse = this.DeleteCourse.bind(this);
-    }
-
-    TranslationSemester(){
-      if(this.props.status ==='Started'){
-          return <div className = 'text-primary'>В процессе обучения</div>
-      }
-      else if(this.props.status === 'OpenForAssigning'){
-          return <div className = 'text-success'>Открыт для записи</div>
-      }
-      else if(this.props.status === 'Created'){
-          return <div className = 'text-secondary'>Создан</div>
-      }
-      else if(this.props.status === 'Finished'){
-          return <div className = 'text-danger'>Закрыт</div>
-      }
     }
    DeleteCourse(){
     this.props.deleteCourseThunk(this.props.id)
@@ -33,7 +17,7 @@ class CoursesItem extends React.Component {
                 <NavLink to = {'/courses/' + this.props.id} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Card.Header>
                         <h5>{this.props.name} </h5>
-                        <div className='text-end'>{this.TranslationSemester()}</div>
+                        <div className='text-end'>{TranslationSemester(this.props)}</div>
                     </Card.Header>
                     </NavLink>
                      <Card.Body>
